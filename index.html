@@ -701,90 +701,98 @@
 </div>
 </div>
 </section>
-<!-- Contact Section -->
-<section class="py-20 bg-red-100" id="contact">
-<div class="container mx-auto px-4">
-<h2 class="text-4xl md:text-5xl font-bold text-center mb-16 comic-text">Get In Touch</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-<div class="comic-panel bg-white" data-aos="fade-right">
-<h3 class="text-3xl font-bold mb-6">Send Me A Message</h3>
-<form class="space-y-6" id="contact-form">
-<div>
-<label class="block text-xl font-bold mb-2" for="name">Your Name</label>
-<input class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" id="name" name="name" required="" type="text"/>
-</div>
-<div>
-<label class="block text-xl font-bold mb-2" for="email">Your Email</label>
-<input class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" id="email" name="email" required="" type="email"/>
-</div>
-<div>
-<label class="block text-xl font-bold mb-2" for="subject">Subject</label>
-<input class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" id="subject" name="subject" required="" type="text"/>
-</div>
-<div>
-<label class="block text-xl font-bold mb-2" for="message">Your Message</label>
-<textarea class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" id="message" name="message" required="" rows="5"></textarea>
-</div>
-<div>
-<button class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-xl" type="submit">
+   <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-red-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 comic-text">Get In Touch</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="comic-panel bg-white" data-aos="fade-right">
+                    <h3 class="text-3xl font-bold mb-6">Send Me A Message</h3>
+                    <form id="contact-form" class="space-y-6" action="https://formspree.io/f/meoeypvq" method="POST">
+                        <div>
+                            <label for="name" class="block text-xl font-bold mb-2">Your Name</label>
+                            <input type="text" id="name" name="name" class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-xl font-bold mb-2">Your Email</label>
+                            <input type="email" id="email" name="email" class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-xl font-bold mb-2">Subject</label>
+                            <input type="text" id="subject" name="subject" class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-xl font-bold mb-2">Your Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required></textarea>
+                        </div>
+                        <input type="hidden" name="_subject" value="New message from GuyFraser.com">
+                        <input type="hidden" name="_next" value="https://guyfraser.com/thank-you.html">
+                        <div>
+                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-xl">
                                 Send Message
                             </button>
-</div>
-<div class="hidden" id="form-status"></div>
-</form>
-</div>
-<div class="comic-panel bg-white" data-aos="fade-left">
-<h3 class="text-3xl font-bold mb-6">Find Me Here</h3>
-<div class="space-y-6">
-<div class="flex items-center">
-<div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white mr-4">
-<i class="fas fa-map-marker-alt text-2xl"></i>
-</div>
-<div>
-<h4 class="text-xl font-bold">Location</h4>
-<p class="text-lg">Auckland, Aotearoa | New Zealand (except when the city glitches)</p>
-</div>
-</div>
-<div class="flex items-center">
-<div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white mr-4">
-<i class="fas fa-envelope text-2xl"></i>
-</div>
-<div>
-<h4 class="text-xl font-bold">Email</h4>
-<p class="text-lg">frasay@gmail.com</p>
-</div>
-</div>
-<div class="flex items-center">
-<div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white mr-4">
-<i class="fas fa-phone text-2xl"></i>
-</div>
-<div>
-<h4 class="text-xl font-bold">Phone</h4>
-<p class="text-lg">(555) STRAWBERRY</p>
-</div>
-</div>
-</div>
-<div class="mt-10">
-<h4 class="text-2xl font-bold mb-4">Follow My Strange Journey</h4>
-<div class="flex space-x-4">
-<a class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-300" href="#">
-<i class="fab fa-facebook-f text-2xl"></i>
-</a>
-<a class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center text-white hover:bg-blue-500 transition-colors duration-300" href="#">
-<i class="fab fa-twitter text-2xl"></i>
-</a>
-<a class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center text-white hover:bg-pink-700 transition-colors duration-300" href="#">
-<i class="fab fa-instagram text-2xl"></i>
-</a>
-<a class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-colors duration-300" href="#">
-<i class="fab fa-youtube text-2xl"></i>
-</a>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
+                        </div>
+                        <div id="form-status" class="hidden"></div>
+                    </form>
+                </div>
+                
+                <div class="comic-panel bg-white" data-aos="fade-left">
+                    <h3 class="text-3xl font-bold mb-6">Find Me Here</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white mr-4">
+                                <i class="fas fa-map-marker-alt text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold">Location</h4>
+                                <p class="text-lg">Auckland, Aotearoa | New Zealand (except when the city glitches)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white mr-4">
+                                <i class="fas fa-envelope text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold">Email</h4>
+                                <p class="text-lg">frasay@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white mr-4">
+                                <i class="fas fa-phone text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold">Phone</h4>
+                                <p class="text-lg">(555) STRAWBERRY</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10">
+                        <h4 class="text-2xl font-bold mb-4">Follow My Strange Journey</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-300">
+                                <i class="fab fa-facebook-f text-2xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center text-white hover:bg-blue-500 transition-colors duration-300">
+                                <i class="fab fa-twitter text-2xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center text-white hover:bg-pink-700 transition-colors duration-300">
+                                <i class="fab fa-instagram text-2xl"></i>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-colors duration-300">
+                                <i class="fab fa-youtube text-2xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 <!-- Newsletter Section -->
 <section class="py-16 bg-yellow-400 border-t-4 border-b-4 border-black">
 <div class="container mx-auto px-4">
