@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ghee's Threads | Guy Fraser</title>
+<meta content="Ghee's Threads | Guy Fraser" property="og:title"/>
+<meta content="Clothing for people who aren't quite right, but in a good way - by Guy 'Ghee Frasay' Fraser" property="og:description"/>
+<meta content="assets/img_1200x630_d03598e1.png" property="og:image"/>
+<meta content="website" property="og:type"/>
+<link href="assets/img_32x32_7dc5df35.png" rel="icon"/>
+<!-- Tailwind CSS -->
+<script src="assets/script_1407c9bc.js"></script>
+<!-- Animation Libraries -->
+<link href="assets/style_71401740.css" rel="stylesheet"/>
+<script src="assets/script_8a9e0588.js"></script>
+<script src="assets/script_2d3dde9f.js"></script>
+<link href="assets/style_eb47d0a1.css" rel="stylesheet"/>
+<!-- Font Awesome -->
+<link href="assets/style_49e9443c.css" rel="stylesheet"/>
+<script crossorigin="" src="assets/script_ae6459bd.js"></script>
+<style>
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-path: '/chat/webfonts/fa-regular-400';
+            src: url('/chat/webfonts/fa-regular-400.woff2') format('woff2'),
+                url('/chat/webfonts/fa-regular-400.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-path: '/chat/webfonts/fa-solid-900';
+            src: url('/chat/webfonts/fa-solid-900.woff2') format('woff2'),
+                url('/chat/webfonts/fa-solid-900.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Font Awesome 6 Brands';
+            font-path: '/chat/webfonts/fa-brands-400';
+            src: url('/chat/webfonts/fa-brands-400.woff2') format('woff2'),
+                url('/chat/webfonts/fa-brands-400.ttf') format('truetype');
+        }
+        
+        /* Custom Comic Font */
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+        
+        body {
+            font-family: 'Comic Sans MS', 'Bangers', cursive, sans-serif;
+            background-color: #f9f3e5;
+            overflow-x: hidden;
+        }
+        
+        .comic-border {
+            border: 3px solid black;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.8);
+        }
+        
+        .comic-text {
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+        }
+        
+        .speech-bubble {
+            position: relative;
+            background: white;
+            border-radius: 1em;
+            padding: 20px;
+            border: 3px solid black;
+        }
+        
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border: 20px solid transparent;
+            border-top-color: white;
+            border-bottom: 0;
+            margin-left: -20px;
+            margin-bottom: -20px;
+        }
+        
+        .speech-bubble:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border: 23px solid transparent;
+            border-top-color: black;
+            border-bottom: 0;
+            margin-left: -23px;
+            margin-bottom: -23px;
+        }
+        
+        .comic-panel {
+            background-color: white;
+            padding: 20px;
+            border: 3px solid black;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.8);
+            transform: rotate(-1deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .comic-panel:hover {
+            transform: rotate(1deg) scale(1.02);
+        }
+        
+        .strawberry-bg {
+            background-image: url('https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=pattern of small strawberries in robert crumb style&w=200&h=200&transparent=true&style=artistic');
+            background-repeat: repeat;
+            background-size: 100px;
+            opacity: 0.1;
+        }
+        
+        .cursor-comic {
+            cursor: url('https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=small pencil in robert crumb style&w=32&h=32&transparent=true&style=artistic'), auto;
+        }
+        
+        /* Loading animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f9f3e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loading-comic {
+            width: 200px;
+            height: 200px;
+            animation: bounce 1s infinite alternate;
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-20px); }
+        }
+        
+        /* Clothing Grid Styles */
+        .clothing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .clothing-item {
+            background-color: white;
+            border: 3px solid black;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.8);
+            padding: 15px;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .clothing-item:hover {
+            transform: rotate(2deg) scale(1.05);
+        }
+        
+        .clothing-item:nth-child(even):hover {
+            transform: rotate(-2deg) scale(1.05);
+        }
+        
+        .clothing-image {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .clothing-image img {
+            transition: transform 0.5s ease;
+        }
+        
+        .clothing-item:hover .clothing-image img {
+            transform: scale(1.1);
+        }
+        
+        .size-tag {
+            display: inline-block;
+            background-color: #333;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-right: 5px;
+            font-size: 0.8rem;
+        }
+        
+        .price-tag {
+            display: inline-block;
+            background-color: #e53e3e;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .sold-out-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            transform: rotate(15deg);
+            font-weight: bold;
+            z-index: 10;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+        
+        .filter-button {
+            background-color: white;
+            border: 2px solid black;
+            padding: 8px 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-button:hover, .filter-button.active {
+            background-color: black;
+            color: white;
+        }
+        
+        /* Cart button */
+        .cart-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #e53e3e;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            cursor: pointer;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+        
+        .cart-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: black;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+<script>
+            window.load_data_from_csv = (filename) => {
+                // Implementation needed when code is downloaded
+            };
+
+            window.save_data_to_csv = (filename, data) => {
+                // Implementation needed when code is downloaded
+            };
+
+            window.call_llm = (system_prompt, user_messages, json_fields) => {
+                // Implementation needed when code is downloaded
+            };
+        </script></head>
+<body class="cursor-comic">
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loading">
+<img alt="Loading..." class="loading-comic" src="assets/img_200x200_67658550.png"/>
+</div>
+<!-- Navigation -->
+<nav class="bg-yellow-400 border-b-4 border-black sticky top-0 z-50">
+<div class="container mx-auto px-4 py-3">
+<div class="flex justify-between items-center">
+<div class="flex items-center">
+<a class="flex items-center" href="index.html">
+<img alt="Guy Fraser Logo" class="h-12 w-12 mr-3" src="assets/img_50x50_1ee65f50.png"/>
+<span class="text-3xl font-bold comic-text">GuyFraser.com</span>
+</a>
+</div>
+<div class="hidden md:flex space-x-6 items-center">
+<a class="text-xl font-bold hover:text-red-600 transition-colors duration-300" href="index.html#about">About</a>
+<a class="text-xl font-bold hover:text-red-600 transition-colors duration-300" href="index.html#portfolio">Portfolio</a>
+<a class="text-xl font-bold hover:text-red-600 transition-colors duration-300" href="index.html#stories">Stories</a>
+<a class="text-xl font-bold hover:text-red-600 transition-colors duration-300" href="index.html#contact">Contact</a>
+</div>
+<div class="md:hidden">
+<button class="text-2xl" id="menu-toggle">
+<i class="fas fa-bars"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- Mobile Menu -->
+<div class="hidden md:hidden bg-yellow-400 border-t-2 border-black" id="mobile-menu">
+<div class="container mx-auto px-4 py-2">
+<a class="block py-2 text-xl font-bold" href="index.html#about">About</a>
+<a class="block py-2 text-xl font-bold" href="index.html#portfolio">Portfolio</a>
+<a class="block py-2 text-xl font-bold" href="index.html#stories">Stories</a>
+<a class="block py-2 text-xl font-bold" href="index.html#contact">Contact</a>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative py-20 overflow-hidden">
+<div class="absolute inset-0 strawberry-bg"></div>
+<div class="container mx-auto px-4 relative z-10">
+<div class="max-w-4xl mx-auto text-center">
+<h1 class="text-5xl md:text-6xl font-bold comic-text mb-6">Ghee's Threads</h1>
+<div class="speech-bubble inline-block mb-8">
+<h2 class="text-2xl md:text-3xl font-bold">Clothing for People Who Aren't Quite Right</h2>
+<p class="text-xl mt-2">(But in the Best Possible Way)</p>
+</div>
+<p class="text-xl mb-8">A fashion line inspired by disappearing electronics stores, French agriculture, and the beautiful strangeness of being slightly out of sync with reality.</p>
+<img alt="Ghee's Threads Fashion Show" class="mx-auto comic-border" loading="lazy" src="assets/img_800x400_4a0ef9fa.png"/>
+</div>
+</div>
+</section>
+<!-- Collection Description -->
+<section class="py-16 bg-white">
+<div class="container mx-auto px-4">
+<div class="max-w-4xl mx-auto">
+<div class="comic-panel" data-aos="fade-up">
+<h2 class="text-3xl font-bold mb-6">The "Not Quite Right" Collection</h2>
+<p class="text-xl mb-4">Have you ever felt like you're operating on a slightly different frequency than everyone else? Like you're tuned to a channel that picks up signals from another dimension?</p>
+<p class="text-xl mb-4">This collection celebrates the beautiful misfits, the delightful oddballs, and the gloriously peculiar humans who make the world more interesting.</p>
+<p class="text-xl">Each piece is designed to be just a little bit "off" - in the most captivating way possible. Like finding a RadioShack that shouldn't exist, these clothes occupy that fascinating space between familiar and strange.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Collection Filters -->
+<section class="py-10 bg-yellow-100">
+<div class="container mx-auto px-4">
+<h2 class="text-4xl font-bold text-center mb-10 comic-text">Browse the Collection</h2>
+<div class="filter-buttons" data-aos="fade-up">
+<button class="filter-button active" data-filter="all">All Items</button>
+<button class="filter-button" data-filter="tops">Tops</button>
+<button class="filter-button" data-filter="bottoms">Bottoms</button>
+<button class="filter-button" data-filter="accessories">Accessories</button>
+<button class="filter-button" data-filter="outerwear">Outerwear</button>
+</div>
+<div class="clothing-grid" id="clothing-container">
+<!-- Clothing items will be dynamically inserted here -->
+</div>
+</div>
+</section>
+<!-- Designer Notes -->
+<section class="py-16 bg-blue-100">
+<div class="container mx-auto px-4">
+<div class="max-w-4xl mx-auto">
+<div class="comic-panel" data-aos="fade-up">
+<h2 class="text-3xl font-bold mb-6">A Note from Ghee</h2>
+<div class="flex items-start mb-6">
+<img alt="Ghee Frasay" class="w-24 h-24 mr-4 comic-border rounded-full" loading="lazy" src="assets/img_150x150_e1861fc0.png"/>
+<div>
+<p class="text-lg mb-4">Fashion should be fun, strange, and slightly unsettling - like finding a store that disappears the next day.</p>
+<p class="text-lg mb-4">I designed these pieces for people who embrace their oddities, who find comfort in discomfort, and who understand that being "not quite right" is actually the highest compliment.</p>
+<p class="text-lg">Each garment contains a hidden strawberry motif somewhere - a nod to my French agricultural heritage. Finding it is part of the experience.</p>
+</div>
+</div>
+<p class="text-lg italic text-center">"Wear what makes you feel delightfully strange." - Ghee Frasay</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Care Instructions -->
+<section class="py-16 bg-green-100">
+<div class="container mx-auto px-4">
+<div class="max-w-4xl mx-auto">
+<div class="comic-panel" data-aos="fade-up">
+<h2 class="text-3xl font-bold mb-6">Unusual Care Instructions</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<h3 class="text-xl font-bold mb-3">Washing</h3>
+<p class="text-lg mb-4">Wash inside out during a waxing moon. For best results, hum a tune you can't quite remember while doing laundry.</p>
+<h3 class="text-xl font-bold mb-3">Drying</h3>
+<p class="text-lg">Hang dry in a location where you've experienced déjà vu. If unavailable, a regular clothesline will suffice, though colors may appear slightly less vibrant.</p>
+</div>
+<div>
+<h3 class="text-xl font-bold mb-3">Ironing</h3>
+<p class="text-lg mb-4">Iron only if necessary. Some wrinkles are intentional and represent the fabric of spacetime.</p>
+<h3 class="text-xl font-bold mb-3">Storage</h3>
+<p class="text-lg">Store alongside items that don't belong together. The juxtaposition keeps the garments happy and prevents them from disappearing like that RadioShack.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter Section -->
+<section class="py-16 bg-yellow-400 border-t-4 border-b-4 border-black">
+<div class="container mx-auto px-4">
+<div class="max-w-3xl mx-auto text-center">
+<h3 class="text-3xl md:text-4xl font-bold mb-6 comic-text">Join the Misfit Mailing List</h3>
+<p class="text-xl mb-8">Be the first to know about new additions to the "Not Quite Right" collection and receive strange fashion advice that might change your life (or at least your wardrobe).</p>
+<form class="flex flex-col sm:flex-row gap-4 justify-center" id="newsletter-form">
+<input class="flex-grow p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Your email address" required="" type="email"/>
+<button class="bg-black hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-xl" type="submit">
+                        Subscribe
+                    </button>
+</form>
+<div class="mt-4 hidden" id="newsletter-status"></div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-black text-white py-12">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+<div>
+<h4 class="text-2xl font-bold mb-4">Ghee's Threads</h4>
+<p class="mb-4">A Guy Fraser Fashion Project</p>
+<a class="inline-block" href="index.html">
+<img alt="Guy Fraser Logo" class="h-16 w-16" loading="lazy" src="assets/img_100x100_1ee65f50.png"/>
+</a>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-4">Quick Links</h4>
+<ul class="space-y-2">
+<li><a class="hover:text-red-400 transition-colors duration-300" href="index.html">Back to Main Site</a></li>
+<li><a class="hover:text-red-400 transition-colors duration-300" href="index.html#portfolio">Other Projects</a></li>
+<li><a class="hover:text-red-400 transition-colors duration-300" href="index.html#contact">Contact</a></li>
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#">Size Guide</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-4">Legal Stuff</h4>
+<ul class="space-y-2">
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#">Terms of Service</a></li>
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#">Return Policy</a></li>
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#">Reality Disclaimer</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-10 pt-6 text-center">
+<p>© 2023 Guy "Ghee Frasay" Fraser. All rights reserved. Clothes may or may not exist tomorrow.</p>
+</div>
+</div>
+</footer>
+<!-- Cart Button -->
+<div class="cart-button" id="cart-button">
+<i class="fas fa-shopping-cart"></i>
+<span class="cart-count">0</span>
+</div>
+<!-- Scripts -->
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // Remove loading overlay
+            const loadingOverlay = document.getElementById('loading');
+            setTimeout(() => {
+                gsap.to(loadingOverlay, {
+                    opacity: 0,
+                    duration: 0.5,
+                    onComplete: () => {
+                        loadingOverlay.style.display = 'none';
+                    }
+                });
+            }, 1000);
+            
+            // Clothing data
+            const clothingItems = [
+                {
+                    id: 1,
+                    name: "Asymmetrical Reality Shirt",
+                    description: "A button-up shirt where the buttons don't align with the buttonholes, but somehow still work. Features one sleeve that's always slightly too long.",
+                    price: 89.99,
+                    image: "https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of asymmetrical button up shirt with misaligned buttons&w=400&h=500&style=artistic",
+                    category: "tops",
+                    sizes: ["S", "M", "L", "XL"],
+                    inStock: true
+                },
+                {
+                    id: 2,
+                    name: "Quantum Pocket Pants",
+                    description: "Trousers with pockets that are bigger on the inside than the outside. Sometimes items placed in them temporarily disappear, only to return later.",
+                    price: 124.50,
+                    image: "https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of strange pants with oversized pockets&w=400&h=500&style=artistic",
+                    category: "bottoms",
+                    sizes: ["28", "30", "32", "34", "36"],
+                    inStock: true
+                },
+                {
+                    id: 3,
+                    name: "Memory Glitch Sweater",
+                    description: "A sweater that changes pattern slightly every time you look away. Others will insist it's always been that way.",
+                    price: 112.00,
+                    image: "https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of sweater with pattern that seems to shift and change&w=400&h=500&style=artistic",
+                    category: "tops",
+                    sizes: ["S", "M", "L"],
+                    inStock: true
+                },
+                {
+                    id: 4,
+                    name: "Third Eye Beanie",
+                    description: "A comfortable beanie with a subtle third eye design that only becomes visible when the wearer is having an insight or revelation.",
+                    price: 45.00,
+                    image: "https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of beanie hat with subtle third eye design&w=400&h=500&style=artistic",
+                    category: "accessories",
+                    sizes: ["One Size"],
+                    inStock: true
+                },
+                {
+                    id: 5,
+                    name: "Strawberry Circuit Board Jacket",
+                    description: "A jacket with an intricate pattern that combines circuit board designs with strawberry motifs. The inside lining occasionally flickers like an old CRT monitor.",
+                    price: 235.00,
+                    image: "https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of jacket with circuit board and strawberry pattern&w=400&h=500&style=artistic",
+                    category: "outerwear",
+                    sizes: ["S", "M", "L", "XL"],
+                    inStock: true
+                },
+                {
+                    id: 6,
+                    name: "Misremembered Band T-Shirt",
+                    description: "A vintage-style t-shirt for a band that never existed, yet somehow feels familiar. Conversations about it lead to strange déjà vu experiences.",
+                    price: 58.50,
+                    image: "https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of vintage band t-shirt for fictional band&w=400&h=500&style=artistic",
+                    category: "tops",
+                    sizes: ["S", "M", "L", "XL", "XXL"],
+                    inStock: false
+                },
+                {
+                    id: 7,
+                    name: "Perception Filter Glasses",
+                    description: "Sunglasses that make digital screens appear to show slightly different content. Text messages may contain hidden meanings only visible to the wearer.",
+                    price: 89.99,
+                    image: "https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of unusual sunglasses with strange lenses&w=400&h=500&style=artistic",
+                    category: "accessories",
+                    sizes: ["One Size"],
+                    inStock: true
+                },
+                {
+                    id: 8,
+                    name: "Temporal Anomaly Skirt",
+                    description: "A skirt that seems to move in slow motion even when the wearer is standing still. The hem occasionally exists in multiple positions simultaneously.",
+                    price: 110.00,
+                    image: "https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of flowing skirt with motion blur effect&w=400&h=500&style=artistic",
+                    category: "bottoms",
+                    sizes: ["XS", "S", "M", "L"],
+                    inStock: true
+                },
+                {
+                    id: 9,
+                    name: "Parallel Universe Hoodie",
+                    description: "A hoodie with a design that changes depending on the viewer's angle. Some people will see completely different colors and patterns than others.",
+                    price: 135.00,
+                    image: "https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of hoodie with strange shifting pattern&w=400&h=500&style=artistic",
+                    category: "outerwear",
+                    sizes: ["S", "M", "L", "XL"],
+                    inStock: true
+                },
+                {
+                    id: 10,
+                    name: "Mandela Effect Socks",
+                    description: "Socks that always appear to be mismatched, even though they're identical. The pattern features logos from products that never existed.",
+                    price: 24.99,
+                    image: "https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of mismatched socks with strange logos&w=400&h=500&style=artistic",
+                    category: "accessories",
+                    sizes: ["S", "M", "L"],
+                    inStock: true
+                },
+                {
+                    id: 11,
+                    name: "Disappearing RadioShack Scarf",
+                    description: "A scarf with a pattern of RadioShack storefronts that fade in and out as the fabric moves. Some people will insist they can't see the pattern at all.",
+                    price: 68.00,
+                    image: "https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of scarf with fading radioshack logos&w=400&h=500&style=artistic",
+                    category: "accessories",
+                    sizes: ["One Size"],
+                    inStock: true
+                },
+                {
+                    id: 12,
+                    name: "Strawberry Farmer Overalls",
+                    description: "Overalls with hidden strawberry patterns that only become visible under certain lighting conditions. The pockets contain soil that never gets your items dirty.",
+                    price: 175.00,
+                    image: "https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of quirky overalls with hidden strawberry patterns&w=400&h=500&style=artistic",
+                    category: "bottoms",
+                    sizes: ["XS", "S", "M", "L", "XL"],
+                    inStock: false
+                }
+            ];
+            
+            // Render clothing items
+            const clothingContainer = document.getElementById('clothing-container');
+            
+            function renderClothingItems(items) {
+                clothingContainer.innerHTML = '';
+                
+                items.forEach(item => {
+                    const clothingItem = document.createElement('div');
+                    clothingItem.className = `clothing-item ${item.category}`;
+                    clothingItem.dataset.category = item.category;
+                    
+                    let sizesHTML = '';
+                    item.sizes.forEach(size => {
+                        sizesHTML += `<span class="size-tag">${size}</span>`;
+                    });
+                    
+                    clothingItem.innerHTML = `
+                        <div class="clothing-image">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-80 object-cover comic-border">
+                            ${!item.inStock ? '<div class="sold-out-badge">SOLD OUT</div>' : ''}
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">${item.name}</h3>
+                        <p class="text-gray-700 mb-4">${item.description}</p>
+                        <div class="flex justify-between items-center mb-3">
+                            <div>
+                                ${sizesHTML}
+                            </div>
+                            <span class="price-tag">$${item.price.toFixed(2)}</span>
+                        </div>
+                        <button class="add-to-cart w-full bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-lg transition-colors duration-300" ${!item.inStock ? 'disabled' : ''} data-id="${item.id}">
+                            ${item.inStock ? 'Add to Cart' : 'Out of Stock'}
+                        </button>
+                    `;
+                    
+                    clothingContainer.appendChild(clothingItem);
+                });
+                
+                // Add event listeners to "Add to Cart" buttons
+                document.querySelectorAll('.add-to-cart').forEach(button => {
+                    button.addEventListener('click', function() {
+                        if (this.disabled) return;
+                        
+                        const itemId = parseInt(this.dataset.id);
+                        addToCart(itemId);
+                        
+                        // Animation
+                        this.textContent = 'Added!';
+                        this.classList.add('bg-green-600');
+                        
+                        setTimeout(() => {
+                            this.textContent = 'Add to Cart';
+                            this.classList.remove('bg-green-600');
+                        }, 2000);
+                    });
+                });
+            }
+            
+            // Initial render
+            renderClothingItems(clothingItems);
+            
+            // Filter functionality
+            const filterButtons = document.querySelectorAll('.filter-button');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filter = this.dataset.filter;
+                    
+                    if (filter === 'all') {
+                        renderClothingItems(clothingItems);
+                    } else {
+                        const filteredItems = clothingItems.filter(item => item.category === filter);
+                        renderClothingItems(filteredItems);
+                    }
+                });
+            });
+            
+            // Cart functionality
+            let cart = [];
+            const cartButton = document.getElementById('cart-button');
+            const cartCount = cartButton.querySelector('.cart-count');
+            
+            function addToCart(itemId) {
+                const item = clothingItems.find(item => item.id === itemId);
+                if (item && item.inStock) {
+                    cart.push(item);
+                    updateCartCount();
+                    
+                    // Cart button animation
+                    gsap.to(cartButton, {
+                        scale: 1.2,
+                        duration: 0.2,
+                        yoyo: true,
+                        repeat: 1
+                    });
+                }
+            }
+            
+            function updateCartCount() {
+                cartCount.textContent = cart.length;
+            }
+            
+            // Cart button click
+            cartButton.addEventListener('click', function() {
+                alert(`Your cart contains ${cart.length} items. This would normally open a cart modal or take you to a checkout page.`);
+            });
+            
+            // Newsletter form handling
+            const newsletterForm = document.getElementById('newsletter-form');
+            const newsletterStatus = document.getElementById('newsletter-status');
+            
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get email
+                    const email = newsletterForm.querySelector('input[type="email"]').value;
+                    
+                    // Show success message
+                    newsletterStatus.innerHTML = '<p class="text-green-600 font-bold">Subscribed successfully! Welcome to the Misfit Mailing List.</p>';
+                    newsletterStatus.classList.remove('hidden');
+                    
+                    // Reset form
+                    newsletterForm.reset();
+                    
+                    // Hide message after 5 seconds
+                    setTimeout(() => {
+                        newsletterStatus.classList.add('hidden');
+                    }, 5000);
+                });
+            }
+            
+            // Random item rotation on page load
+            const randomItems = Array.from(document.querySelectorAll('.clothing-item')).slice(0, 5);
+            randomItems.forEach(item => {
+                const randomRotation = Math.random() * 6 - 3; // Between -3 and 3 degrees
+                item.style.transform = `rotate(${randomRotation}deg)`;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Guy Fraser | Creative Wunderkind</title>
+<meta content="Guy Fraser | Creative Wunderkind" property="og:title"/>
+<meta content="The official website of Guy 'Ghee Frasay' Fraser - creative wunderkind and strawberry farmer descendant" property="og:description"/>
+<meta content="assets/img_1200x630_7c590446.png" property="og:image"/>
+<meta content="website" property="og:type"/>
+<link href="assets/img_32x32_7dc5df35.png" rel="icon"/>
+<!-- Tailwind CSS -->
+<script src="assets/script_0bcb231f.js"></script>
+<!-- Animation Libraries -->
+<link href="assets/style_9d544d1a.css" rel="stylesheet"/>
+<script src="assets/script_fac60aee.js"></script>
+<script src="assets/script_59bac31b.js"></script>
+<link href="assets/style_fb81ae60.css" rel="stylesheet"/>
+<!-- Font Awesome -->
+<link href="assets/style_b2307571.css" rel="stylesheet"/>
+<script crossorigin="" src="assets/script_e39fb818.js"></script>
+<!-- CSV Parsing -->
+<script src="assets/script_86f3ac93.js"></script>
+<style>
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-path: '/chat/webfonts/fa-regular-400';
+            src: url('/chat/webfonts/fa-regular-400.woff2') format('woff2'),
+                url('/chat/webfonts/fa-regular-400.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-path: '/chat/webfonts/fa-solid-900';
+            src: url('/chat/webfonts/fa-solid-900.woff2') format('woff2'),
+                url('/chat/webfonts/fa-solid-900.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Font Awesome 6 Brands';
+            font-path: '/chat/webfonts/fa-brands-400';
+            src: url('/chat/webfonts/fa-brands-400.woff2') format('woff2'),
+                url('/chat/webfonts/fa-brands-400.ttf') format('truetype');
+        }
+        
+        /* Custom Comic Font */
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+        
+        body {
+            font-family: 'Comic Sans MS', 'Bangers', cursive, sans-serif;
+            background-color: #f9f3e5;
+            overflow-x: hidden;
+        }
+        
+        .comic-border {
+            border: 3px solid black;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.8);
+        }
+        
+        .comic-text {
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+        }
+        
+        .speech-bubble {
+            position: relative;
+            background: white;
+            border-radius: 1em;
+            padding: 20px;
+            border: 3px solid black;
+        }
+        
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border: 20px solid transparent;
+            border-top-color: white;
+            border-bottom: 0;
+            margin-left: -20px;
+            margin-bottom: -20px;
+        }
+        
+        .speech-bubble:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border: 23px solid transparent;
+            border-top-color: black;
+            border-bottom: 0;
+            margin-left: -23px;
+            margin-bottom: -23px;
+        }
+        
+        .comic-panel {
+            background-color: white;
+            padding: 20px;
+            border: 3px solid black;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.8);
+            transform: rotate(-1deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .comic-panel:hover {
+            transform: rotate(1deg) scale(1.02);
+        }
+        
+        .strawberry-bg {
+            background-image: url('https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=pattern of small strawberries in robert crumb style&w=200&h=200&transparent=true&style=artistic');
+            background-repeat: repeat;
+            background-size: 100px;
+            opacity: 0.1;
+        }
+        
+        .cursor-comic {
+            cursor: url('https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=small pencil in robert crumb style&w=32&h=32&transparent=true&style=artistic'), auto;
+        }
+        
+        /* Loading animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f9f3e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loading-comic {
+            width: 200px;
+            height: 200px;
+            animation: bounce 1s infinite alternate;
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-20px); }
+        }
+        
+        /* RadioShack Simulator Styles */
+        .radioshack-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9998;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .radioshack-content {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            background-color: white;
+            border: 3px solid black;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.8);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .radioshack-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .glitch-effect {
+            animation: glitch 1s infinite;
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-5px, 5px); }
+            40% { transform: translate(-5px, -5px); }
+            60% { transform: translate(5px, 5px); }
+            80% { transform: translate(5px, -5px); }
+            100% { transform: translate(0); }
+        }
+        
+        .radioshack-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin: 0 auto;
+            border: 2px solid black;
+        }
+        
+        .static-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=tv static noise pattern black and white&w=400&h=400&style=artistic');
+            opacity: 0.1;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+        }
+        
+        /* Ghee's Threads Styles */
+        .threads-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9998;
+            overflow-y: auto;
+        }
+        
+        .threads-content {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+            background-color: #f9f3e5;
+            border: 3px solid black;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.8);
+            padding: 30px;
+        }
+        
+        .threads-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .clothing-item {
+            transition: transform 0.3s ease;
+        }
+        
+        .clothing-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .price-tag {
+            background-color: #ffcc00;
+            color: black;
+            padding: 5px 10px;
+            border: 2px solid black;
+            transform: rotate(-5deg);
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-weight: bold;
+        }
+        
+        /* Strawberry Paradox Styles */
+        .strawberry-paradox-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9998;
+            overflow-y: auto;
+        }
+        
+        .strawberry-paradox-content {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+            background-color: #f9f3e5;
+            border: 3px solid black;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.8);
+            padding: 30px;
+        }
+        
+        .strawberry-paradox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .interactive-element {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .interactive-element:hover {
+            transform: scale(1.05);
+        }
+        
+        .strawberry-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border: 3px solid black;
+            overflow: hidden;
+            margin: 20px 0;
+            background-color: #fff;
+        }
+        
+        .strawberry {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .strawberry:hover {
+            transform: scale(1.2);
+        }
+        
+        /* Quantum Locations Styles */
+        .quantum-locations-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9998;
+            overflow-y: auto;
+        }
+        
+        .quantum-locations-content {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+            background-color: #f9f3e5;
+            border: 3px solid black;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.8);
+            padding: 30px;
+        }
+        
+        .quantum-locations-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .location-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .location-pair {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .location-image {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .location-image img {
+            width: 100%;
+            height: auto;
+            transition: opacity 0.5s ease;
+        }
+        
+        .location-image:hover .image-overlay {
+            opacity: 1;
+        }
+        
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .overlay-text {
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+<script>
+            window.load_data_from_csv = (filename) => {
+                // Implementation needed when code is downloaded
+            };
+
+            window.save_data_to_csv = (filename, data) => {
+                // Implementation needed when code is downloaded
+            };
+
+            window.call_llm = (system_prompt, user_messages, json_fields) => {
+                // Implementation needed when code is downloaded
+            };
+        </script></head>
+<body class="cursor-comic">
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loading">
+<img alt="Loading..." class="loading-comic" src="assets/img_200x200_67658550.png"/>
+</div>
+<!-- Navigation -->
+<nav class="bg-yellow-400 border-b-4 border-black sticky top-0 z-50">
+<div class="container mx-auto px-4 py-3">
+<div class="flex justify-between items-center">
+<div class="flex items-center">
+<img alt="Guy Fraser Logo" class="h-12 w-12 mr-3" src="assets/img_50x50_1ee65f50.png"/>
+<span class="text-3xl font-bold comic-text">GuyFraser.com</span>
+</div>
+<div class="hidden md:flex space-x-6 items-center">
+<a class="text-xl font-bold hover:text-red-600 transition-colors duration-300" href="#about">About</a>
+<a class="text-xl font-bold hover:text-red-600 transition-colors duration-300" href="#portfolio">Portfolio</a>
+<a class="text-xl font-bold hover:text-red-600 transition-colors duration-300" href="#stories">Stories</a>
+<a class="text-xl font-bold hover:text-red-600 transition-colors duration-300" href="#contact">Contact</a>
+</div>
+<div class="md:hidden">
+<button class="text-2xl" id="menu-toggle">
+<i class="fas fa-bars"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- Mobile Menu -->
+<div class="hidden md:hidden bg-yellow-400 border-t-2 border-black" id="mobile-menu">
+<div class="container mx-auto px-4 py-2">
+<a class="block py-2 text-xl font-bold" href="#about">About</a>
+<a class="block py-2 text-xl font-bold" href="#portfolio">Portfolio</a>
+<a class="block py-2 text-xl font-bold" href="#stories">Stories</a>
+<a class="block py-2 text-xl font-bold" href="#contact">Contact</a>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 strawberry-bg"></div>
+<div class="container mx-auto px-4 py-20 relative z-10">
+<div class="flex flex-col md:flex-row items-center">
+<div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
+<img alt="Guy Fraser Portrait" class="comic-border mx-auto transform -rotate-2 hover:rotate-0 transition-transform duration-300" loading="lazy" onerror="this.src='https://cdn.simulationtheory.ai/gasset/?asset=img&amp;prompt=simple cartoon character&amp;w=600&amp;h=800&amp;style=artistic'; this.onerror=null;" onload="this.classList.add('loaded')" src="assets/img_600x800_3042f187.png"/>
+</div>
+<div class="md:w-1/2 text-center md:text-left" data-aos="fade-left">
+<div class="speech-bubble inline-block mb-6">
+<h2 class="text-2xl md:text-3xl font-bold mb-2">Hey there, I'm</h2>
+<h1 class="text-4xl md:text-6xl font-bold comic-text text-red-600 mb-4">Guy Fraser</h1>
+<p class="text-xl md:text-2xl mb-4">But you can call me <span class="font-bold italic">Ghee Frasay</span></p>
+</div>
+<h3 class="text-2xl md:text-3xl font-bold mb-6 comic-text">Creative Wunderkind &amp; Strawberry Descendant</h3>
+<p class="text-lg md:text-xl mb-8">From the French "Fraise" (strawberry farmer) to creative genius. I make weird things happen in unexpected places.</p>
+<div class="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+<a class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-xl" href="#portfolio">
+                            See My Work
+                        </a>
+<a class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-xl" href="#contact">
+                            Get In Touch
+                        </a>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-10 left-0 right-0 text-center">
+<a class="text-4xl animate-bounce inline-block" href="#about">
+<i class="fas fa-chevron-down"></i>
+</a>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-20 bg-white" id="about">
+<div class="container mx-auto px-4">
+<h2 class="text-4xl md:text-5xl font-bold text-center mb-16 comic-text">Who Is This Guy?</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<div class="comic-panel" data-aos="fade-up">
+<h3 class="text-2xl font-bold mb-4">The Strawberry Connection</h3>
+<div class="flex items-start mb-6">
+<img alt="Strawberry Fields" class="w-24 h-24 mr-4 comic-border" loading="lazy" src="assets/img_150x150_a470f8b5.png"/>
+<p class="text-lg">My name Fraser comes from the French word "Fraise," meaning strawberry farmer. I've embraced this sweet heritage in my creative work.</p>
+</div>
+<p class="text-lg">While I don't actually farm strawberries, I do cultivate ideas that are just as fresh, juicy, and sometimes a little seedy.</p>
+</div>
+<div class="comic-panel" data-aos="fade-up" data-aos-delay="100">
+<h3 class="text-2xl font-bold mb-4">The Vanishing RadioShack</h3>
+<div class="flex items-start mb-6">
+<img alt="Mysterious RadioShack" class="w-24 h-24 mr-4 comic-border" loading="lazy" src="assets/img_150x150_d1621e5c.png"/>
+<p class="text-lg">One time I saw a RadioShack with my friend in LA, but the next day it wasn't there. Was it a glitch in the matrix? A temporal anomaly?</p>
+</div>
+<p class="text-lg">This experience sparked my fascination with the ephemeral nature of reality and the stories we tell ourselves about what's real.</p>
+</div>
+<div class="comic-panel" data-aos="fade-up" data-aos-delay="200">
+<h3 class="text-2xl font-bold mb-4">Creative Wunderkind</h3>
+<div class="flex items-start mb-6">
+<img alt="Creative Process" class="w-24 h-24 mr-4 comic-border" loading="lazy" src="assets/img_150x150_f087e955.png"/>
+<p class="text-lg">I've been called a "creative wunderkind" - a fancy way of saying I come up with weird ideas that sometimes actually work.</p>
+</div>
+<p class="text-lg">My approach combines unexpected elements to create something new. Like putting pineapple on pizza, but for art and design.</p>
+</div>
+<div class="comic-panel" data-aos="fade-up" data-aos-delay="300">
+<h3 class="text-2xl font-bold mb-4">The Ghee Frasay Persona</h3>
+<div class="flex items-start mb-6">
+<img alt="Ghee Frasay Persona" class="w-24 h-24 mr-4 comic-border" loading="lazy" src="assets/img_150x150_8a90d579.png"/>
+<p class="text-lg">Ghee Frasay is what happens when Guy Fraser has had exactly two and a half drinks - not quite drunk, but definitely more interesting at parties.</p>
+</div>
+<p class="text-lg">This alter ego helps me explore creative territories I might otherwise avoid. Plus, it sounds fancy when pronounced with a terrible French accent.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Portfolio Section -->
+<section class="py-20 bg-yellow-100" id="portfolio">
+<div class="container mx-auto px-4">
+<h2 class="text-4xl md:text-5xl font-bold text-center mb-16 comic-text">My Weird &amp; Wonderful Work</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Portfolio Item 1 - Strawberry Paradox -->
+<div class="comic-panel bg-white" data-aos="zoom-in">
+<div class="relative overflow-hidden mb-4">
+<img alt="Surreal Art Installation" class="w-full h-64 object-cover comic-border" loading="lazy" src="assets/img_400x300_7abb8bd2.png"/>
+<div class="absolute top-0 right-0 bg-red-500 text-white py-1 px-3 font-bold">ART</div>
+</div>
+<h3 class="text-2xl font-bold mb-2">The Strawberry Paradox</h3>
+<p class="text-lg mb-4">An interactive installation exploring the relationship between fruit and existential dread.</p>
+<a class="inline-block bg-black text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors duration-300" href="#" id="strawberry-paradox-link">View Project</a>
+</div>
+<!-- Portfolio Item 2 - RadioShack Simulator -->
+<div class="comic-panel bg-white" data-aos="zoom-in" data-aos-delay="100">
+<div class="relative overflow-hidden mb-4">
+<img alt="RadioShack Simulator" class="w-full h-64 object-cover comic-border" loading="lazy" src="assets/img_400x300_a8ffd15f.png"/>
+<div class="absolute top-0 right-0 bg-blue-500 text-white py-1 px-3 font-bold">INTERACTIVE</div>
+</div>
+<h3 class="text-2xl font-bold mb-2">RadioShack Simulator</h3>
+<p class="text-lg mb-4">A digital experience that recreates the feeling of finding a store that doesn't exist the next day.</p>
+<a class="inline-block bg-black text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors duration-300" href="#" id="radioshack-link">Experience It</a>
+</div>
+<!-- Portfolio Item 3 -->
+<div class="comic-panel bg-white" data-aos="zoom-in" data-aos-delay="200">
+<div class="relative overflow-hidden mb-4">
+<img alt="Experimental Music Performance" class="w-full h-64 object-cover comic-border" loading="lazy" src="assets/img_400x300_39c7625c.png"/>
+<div class="absolute top-0 right-0 bg-green-500 text-white py-1 px-3 font-bold">MUSIC</div>
+</div>
+<h3 class="text-2xl font-bold mb-2">Fraise Sonata</h3>
+<p class="text-lg mb-4">An experimental album where all sounds were created using actual strawberries and farming equipment.</p>
+<a class="inline-block bg-black text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors duration-300" href="#">View Project</a>
+</div>
+<!-- Portfolio Item 4 - Ghee's Threads -->
+<div class="comic-panel bg-white" data-aos="zoom-in" data-aos-delay="300">
+<div class="relative overflow-hidden mb-4">
+<img alt="Bizarre Fashion Design" class="w-full h-64 object-cover comic-border" loading="lazy" src="assets/img_400x300_2fa2731f.png"/>
+<div class="absolute top-0 right-0 bg-purple-500 text-white py-1 px-3 font-bold">FASHION</div>
+</div>
+<h3 class="text-2xl font-bold mb-2">Ghee's Threads</h3>
+<p class="text-lg mb-4">A clothing line inspired by the aesthetic of disappearing electronics stores and French agriculture.</p>
+<a class="inline-block bg-black text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors duration-300" href="#" id="threads-link">View Collection</a>
+</div>
+<!-- Portfolio Item 5 -->
+<div class="comic-panel bg-white" data-aos="zoom-in" data-aos-delay="400">
+<div class="relative overflow-hidden mb-4">
+<img alt="Strange Publication" class="w-full h-64 object-cover comic-border" loading="lazy" src="assets/img_400x300_91b1ac1a.png"/>
+<div class="absolute top-0 right-0 bg-yellow-500 text-white py-1 px-3 font-bold">WRITING</div>
+</div>
+<h3 class="text-2xl font-bold mb-2">The Disappearing Manual</h3>
+<p class="text-lg mb-4">A choose-your-own-adventure book where pages randomly disappear and reappear with different content.</p>
+<a class="inline-block bg-black text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors duration-300" href="#">View Project</a>
+</div>
+<!-- Portfolio Item 6 - Quantum Locations -->
+<div class="comic-panel bg-white" data-aos="zoom-in" data-aos-delay="500">
+<div class="relative overflow-hidden mb-4">
+<img alt="Conceptual Photography" class="w-full h-64 object-cover comic-border" loading="lazy" src="assets/img_400x300_83399f5b.png"/>
+<div class="absolute top-0 right-0 bg-red-500 text-white py-1 px-3 font-bold">PHOTO</div>
+</div>
+<h3 class="text-2xl font-bold mb-2">Quantum Locations</h3>
+<p class="text-lg mb-4">A photo series documenting places that seem to shift and change between visits, like that RadioShack.</p>
+<a class="inline-block bg-black text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors duration-300" href="#" id="quantum-locations-link">View Project</a>
+</div>
+</div>
+<div class="text-center mt-16">
+<a class="inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-xl" href="#">
+                    View All Projects
+                </a>
+</div>
+</div>
+</section>
+<!-- Stories Section -->
+<section class="py-20 bg-blue-100" id="stories">
+<div class="container mx-auto px-4">
+<h2 class="text-4xl md:text-5xl font-bold text-center mb-16 comic-text">Strange But True Stories</h2>
+<div class="max-w-4xl mx-auto comic-panel bg-white" data-aos="fade-up">
+<h3 class="text-3xl font-bold mb-6">The Case of the Vanishing RadioShack</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="col-span-1">
+<img alt="Vanishing RadioShack Comic Panel" class="w-full comic-border" loading="lazy" src="assets/img_300x400_d08abe34.png"/>
+</div>
+<div class="col-span-2">
+<p class="text-lg mb-4">It was a Tuesday afternoon in LA when my friend and I passed by a RadioShack. Nothing unusual about that, except RadioShack had gone bankrupt years ago.</p>
+<p class="text-lg mb-4">"Let's check it out," I said, curious about this apparent time warp. Inside, everything seemed normal - shelves of electronics, that distinctive smell of plastic and possibility.</p>
+<p class="text-lg">The next day, I returned to show another friend. The store was gone. Not closed - GONE. A completely different business occupied the space, with no sign that RadioShack had ever been there.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="col-span-2">
+<p class="text-lg mb-4">I called my friend who had been with me. "Remember that RadioShack we went to yesterday?" I asked. "What RadioShack?" they replied, genuinely confused.</p>
+<p class="text-lg mb-4">I've spent years trying to make sense of this experience. Was it a shared hallucination? A glitch in reality? A temporary fold in the space-time continuum?</p>
+<p class="text-lg">Whatever it was, it's become a cornerstone of my creative philosophy: reality is more fluid than we think, and sometimes the most interesting stories come from those moments when the usual rules don't apply.</p>
+</div>
+<div class="col-span-1">
+<img alt="Questioning Reality Comic Panel" class="w-full comic-border" loading="lazy" src="assets/img_300x400_da796089.png"/>
+</div>
+</div>
+</div>
+<div class="text-center mt-16">
+<a class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-xl" href="#">
+                    Read More Strange Tales
+                </a>
+</div>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section class="py-20 bg-green-100">
+<div class="container mx-auto px-4">
+<h2 class="text-4xl md:text-5xl font-bold text-center mb-16 comic-text">What People Say</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Testimonial 1 -->
+<div class="comic-panel bg-white" data-aos="flip-left">
+<div class="flex items-center mb-4">
+<img alt="Gallery Owner" class="w-16 h-16 rounded-full comic-border mr-4" loading="lazy" src="assets/img_100x100_5cfb1cfd.png"/>
+<div>
+<h4 class="text-xl font-bold">Martha Winters</h4>
+<p class="text-gray-600">Gallery Owner</p>
+</div>
+</div>
+<p class="text-lg italic">"Guy's work defies categorization. One minute you're looking at something that seems familiar, the next you're questioning everything you thought you knew about strawberries and electronics."</p>
+<div class="mt-4 text-yellow-500">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="comic-panel bg-white" data-aos="flip-left" data-aos-delay="100">
+<div class="flex items-center mb-4">
+<img alt="Music Producer" class="w-16 h-16 rounded-full comic-border mr-4" loading="lazy" src="assets/img_100x100_0211c800.png"/>
+<div>
+<h4 class="text-xl font-bold">DJ Quantum</h4>
+<p class="text-gray-600">Music Producer</p>
+</div>
+</div>
+<p class="text-lg italic">"Working with Ghee Frasay changed my whole approach to sound. Now I can't help but hear the music in everyday objects. My latest track samples a strawberry being dropped onto a RadioShack calculator."</p>
+<div class="mt-4 text-yellow-500">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star-half-alt"></i>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="comic-panel bg-white" data-aos="flip-left" data-aos-delay="200">
+<div class="flex items-center mb-4">
+<img alt="Fashion Designer" class="w-16 h-16 rounded-full comic-border mr-4" loading="lazy" src="assets/img_100x100_91badc57.png"/>
+<div>
+<h4 class="text-xl font-bold">Eliza Threads</h4>
+<p class="text-gray-600">Fashion Designer</p>
+</div>
+</div>
+<p class="text-lg italic">"Guy's 'Ghee's Threads' collection was the highlight of Alternative Fashion Week. The way he incorporated circuit boards and strawberry motifs was nothing short of revolutionary."</p>
+<div class="mt-4 text-yellow-500">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-20 bg-red-100" id="contact">
+<div class="container mx-auto px-4">
+<h2 class="text-4xl md:text-5xl font-bold text-center mb-16 comic-text">Get In Touch</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<div class="comic-panel bg-white" data-aos="fade-right">
+<h3 class="text-3xl font-bold mb-6">Send Me A Message</h3>
+<form class="space-y-6" id="contact-form">
+<div>
+<label class="block text-xl font-bold mb-2" for="name">Your Name</label>
+<input class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" id="name" name="name" required="" type="text"/>
+</div>
+<div>
+<label class="block text-xl font-bold mb-2" for="email">Your Email</label>
+<input class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" id="email" name="email" required="" type="email"/>
+</div>
+<div>
+<label class="block text-xl font-bold mb-2" for="subject">Subject</label>
+<input class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" id="subject" name="subject" required="" type="text"/>
+</div>
+<div>
+<label class="block text-xl font-bold mb-2" for="message">Your Message</label>
+<textarea class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" id="message" name="message" required="" rows="5"></textarea>
+</div>
+<div>
+<button class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-xl" type="submit">
+                                Send Message
+                            </button>
+</div>
+<div class="hidden" id="form-status"></div>
+</form>
+</div>
+<div class="comic-panel bg-white" data-aos="fade-left">
+<h3 class="text-3xl font-bold mb-6">Find Me Here</h3>
+<div class="space-y-6">
+<div class="flex items-center">
+<div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white mr-4">
+<i class="fas fa-map-marker-alt text-2xl"></i>
+</div>
+<div>
+<h4 class="text-xl font-bold">Location</h4>
+<p class="text-lg">Auckland, Aotearoa | New Zealand (except when the city glitches)</p>
+</div>
+</div>
+<div class="flex items-center">
+<div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white mr-4">
+<i class="fas fa-envelope text-2xl"></i>
+</div>
+<div>
+<h4 class="text-xl font-bold">Email</h4>
+<p class="text-lg">frasay@gmail.com</p>
+</div>
+</div>
+<div class="flex items-center">
+<div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white mr-4">
+<i class="fas fa-phone text-2xl"></i>
+</div>
+<div>
+<h4 class="text-xl font-bold">Phone</h4>
+<p class="text-lg">(555) STRAWBERRY</p>
+</div>
+</div>
+</div>
+<div class="mt-10">
+<h4 class="text-2xl font-bold mb-4">Follow My Strange Journey</h4>
+<div class="flex space-x-4">
+<a class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-300" href="#">
+<i class="fab fa-facebook-f text-2xl"></i>
+</a>
+<a class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center text-white hover:bg-blue-500 transition-colors duration-300" href="#">
+<i class="fab fa-twitter text-2xl"></i>
+</a>
+<a class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center text-white hover:bg-pink-700 transition-colors duration-300" href="#">
+<i class="fab fa-instagram text-2xl"></i>
+</a>
+<a class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-colors duration-300" href="#">
+<i class="fab fa-youtube text-2xl"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter Section -->
+<section class="py-16 bg-yellow-400 border-t-4 border-b-4 border-black">
+<div class="container mx-auto px-4">
+<div class="max-w-3xl mx-auto text-center">
+<h3 class="text-3xl md:text-4xl font-bold mb-6 comic-text">Join the Strawberry Fields Newsletter</h3>
+<p class="text-xl mb-8">Get weird updates, strange stories, and occasional existential crises delivered straight to your inbox.</p>
+<form class="flex flex-col sm:flex-row gap-4 justify-center" id="newsletter-form">
+<input class="flex-grow p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" placeholder="Your email address" required="" type="email"/>
+<button class="bg-black hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-xl" type="submit">
+                        Subscribe
+                    </button>
+</form>
+<div class="mt-4 hidden" id="newsletter-status"></div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-black text-white py-12">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+<div>
+<h4 class="text-2xl font-bold mb-4">Guy Fraser</h4>
+<p class="mb-4">Creative Wunderkind &amp; Strawberry Descendant</p>
+<img alt="Guy Fraser Logo" class="h-16 w-16" loading="lazy" src="assets/img_100x100_1ee65f50.png"/>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-4">Quick Links</h4>
+<ul class="space-y-2">
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#about">About</a></li>
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#portfolio">Portfolio</a></li>
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#stories">Stories</a></li>
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#contact">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-4">Projects</h4>
+<ul class="space-y-2">
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#" id="footer-strawberry">The Strawberry Paradox</a></li>
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#" id="footer-radioshack">RadioShack Simulator</a></li>
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#">Fraise Sonata</a></li>
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#" id="footer-threads">Ghee's Threads</a></li>
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#" id="footer-quantum">Quantum Locations</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-xl font-bold mb-4">Legal Stuff</h4>
+<ul class="space-y-2">
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#">Terms of Service</a></li>
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#">Cookie Policy</a></li>
+<li><a class="hover:text-red-400 transition-colors duration-300" href="#">Strawberry Warranty</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-10 pt-6 text-center">
+<p>© 2023 Guy "Ghee Frasay" Fraser. All rights reserved. No RadioShacks were harmed in the making of this website.</p>
+</div>
+</div>
+</footer>
+<!-- Back to Top Button -->
+<button class="fixed bottom-8 right-8 bg-red-500 text-white w-12 h-12 rounded-full flex items-center justify-center text-2xl opacity-0 invisible transition-all duration-300 hover:bg-red-600" id="back-to-top">
+<i class="fas fa-arrow-up"></i>
+</button>
+<!-- RadioShack Simulator Modal -->
+<div class="radioshack-container" id="radioshack-modal">
+<div class="static-overlay"></div>
+<div class="radioshack-content">
+<span class="radioshack-close">×</span>
+<h2 class="text-3xl font-bold mb-6 glitch-effect">RadioShack Simulator</h2>
+<div class="relative" id="radioshack-stage">
+<div class="mb-8" id="stage-1">
+<img alt="RadioShack Store" class="radioshack-image mb-4" loading="lazy" src="assets/img_600x400_4f629bf7.png"/>
+<p class="text-xl mb-4">You're walking down a street in Auckland when you notice something odd - a RadioShack store with its lights on. Didn't they all close years ago?</p>
+<button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-lg" id="enter-store">
+                        Enter the Store
+                    </button>
+</div>
+<div class="hidden mb-8" id="stage-2">
+<img alt="Inside RadioShack" class="radioshack-image mb-4" loading="lazy" src="assets/img_600x400_c091755f.png"/>
+<p class="text-xl mb-4">Inside, everything looks normal. Shelves of electronics, that distinctive smell of plastic and possibility. A clerk nods at you from behind the counter.</p>
+<div class="flex flex-wrap gap-4 justify-center">
+<button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-lg" id="look-around">
+                            Look Around
+                        </button>
+<button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-lg" id="talk-clerk">
+                            Talk to Clerk
+                        </button>
+</div>
+</div>
+<div class="hidden mb-8" id="stage-3a">
+<img alt="Strange Electronics" class="radioshack-image mb-4" loading="lazy" src="assets/img_600x400_e1e0e991.png"/>
+<p class="text-xl mb-4">You browse the shelves and notice something odd - some of these products look like they're from different decades. A 1980s walkman sits next to a 2010 smartphone prototype that was never released.</p>
+<button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-lg" id="continue-looking">
+                        Continue Looking
+                    </button>
+</div>
+<div class="hidden mb-8" id="stage-3b">
+<img alt="Strange Clerk" class="radioshack-image mb-4" loading="lazy" src="assets/img_600x400_00c8b550.png"/>
+<p class="text-xl mb-4">"How can I help you?" the clerk asks, but their voice sounds strange, like it's coming through an old radio. You notice their nametag keeps changing every few seconds.</p>
+<button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-lg" id="ask-about-store">
+                        Ask About the Store
+                    </button>
+</div>
+<div class="hidden mb-8" id="stage-4">
+<img alt="Glitching Reality" class="radioshack-image mb-4 glitch-effect" loading="lazy" src="assets/img_600x400_bae89f8c.png"/>
+<p class="text-xl mb-4">The walls of the store seem to flicker. For a moment, you see through them to an empty space. The clerk smiles knowingly. "We're not always here. Sometimes we're nowhere at all."</p>
+<button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-lg" id="leave-store">
+                        Leave the Store
+                    </button>
+</div>
+<div class="hidden mb-8" id="stage-5">
+<img alt="Empty Lot" class="radioshack-image mb-4" loading="lazy" src="assets/img_600x400_c0b7f226.png"/>
+<p class="text-xl mb-4">The next day, you return to the same street. The RadioShack is gone. In its place is a vacant lot that looks like it's been empty for years. Your phone has no record of the photos you took inside.</p>
+<button class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-6 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-lg" id="question-reality">
+                        Question Your Reality
+                    </button>
+</div>
+<div class="hidden mb-8" id="stage-final">
+<img alt="Questioning Reality" class="radioshack-image mb-4" loading="lazy" src="assets/img_600x400_4da577c3.png"/>
+<p class="text-xl mb-4">Was it all a dream? A hallucination? Or did you briefly step into another layer of reality? Your friend who was with you has no memory of ever entering a RadioShack.</p>
+<p class="text-xl mb-6">Sometimes the world glitches. Sometimes stores appear and disappear. Sometimes reality isn't as solid as we think.</p>
+<button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-lg" id="restart-experience">
+                        Experience Again
+                    </button>
+<button class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-lg ml-4" id="close-simulator">
+                        Return to Reality
+                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Ghee's Threads Collection Modal -->
+<div class="threads-container" id="threads-modal">
+<div class="threads-content">
+<span class="threads-close">×</span>
+<h2 class="text-4xl font-bold text-center mb-8 comic-text">Ghee's Threads</h2>
+<p class="text-xl text-center mb-10">Fashion for people who aren't quite right, but in a good way.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+<!-- Clothing Item 1 -->
+<div class="clothing-item relative">
+<img alt="Circuit Board Jacket" class="w-full h-auto comic-border" loading="lazy" src="assets/img_400x500_cacd6c14.png"/>
+<div class="price-tag">$299</div>
+<div class="mt-4">
+<h3 class="text-xl font-bold">The Glitch Jacket</h3>
+<p class="text-gray-700">For those who occasionally phase through dimensions. Circuit board pattern with strawberry patches.</p>
+</div>
+</div>
+<!-- Clothing Item 2 -->
+<div class="clothing-item relative">
+<img alt="Mismatched Socks" class="w-full h-auto comic-border" loading="lazy" src="assets/img_400x500_1a339905.png"/>
+<div class="price-tag">$42</div>
+<div class="mt-4">
+<h3 class="text-xl font-bold">Reality Socks</h3>
+<p class="text-gray-700">Intentionally mismatched. One strawberry pattern, one electronic component pattern. Never the same pair twice.</p>
+</div>
+</div>
+<!-- Clothing Item 3 -->
+<div class="clothing-item relative">
+<img alt="Antenna Hat" class="w-full h-auto comic-border" loading="lazy" src="assets/img_400x500_10e99264.png"/>
+<div class="price-tag">$125</div>
+<div class="mt-4">
+<h3 class="text-xl font-bold">Reception Hat</h3>
+<p class="text-gray-700">For better reception of interdimensional signals. Antenna actually picks up AM radio.</p>
+</div>
+</div>
+<!-- Clothing Item 4 -->
+<div class="clothing-item relative">
+<img alt="Asymmetrical Pants" class="w-full h-auto comic-border" loading="lazy" src="assets/img_400x500_aa66c44b.png"/>
+<div class="price-tag">$189</div>
+<div class="mt-4">
+<h3 class="text-xl font-bold">Half-Here Pants</h3>
+<p class="text-gray-700">One leg normal, one leg semi-transparent with circuit patterns. For those who are only partially present in this reality.</p>
+</div>
+</div>
+<!-- Clothing Item 5 -->
+<div class="clothing-item relative">
+<img alt="Shifting Logo Shirt" class="w-full h-auto comic-border" loading="lazy" src="assets/img_400x500_ef154285.png"/>
+<div class="price-tag">$85</div>
+<div class="mt-4">
+<h3 class="text-xl font-bold">Quantum Logo Tee</h3>
+<p class="text-gray-700">Features a RadioShack logo that appears and disappears depending on the viewing angle and lighting conditions.</p>
+</div>
+</div>
+<!-- Clothing Item 6 -->
+<div class="clothing-item relative">
+<img alt="Static Scarf" class="w-full h-auto comic-border" loading="lazy" src="assets/img_400x500_0a42686c.png"/>
+<div class="price-tag">$68</div>
+<div class="mt-4">
+<h3 class="text-xl font-bold">Static Field Scarf</h3>
+<p class="text-gray-700">Pattern resembles TV static but reveals hidden strawberry designs when viewed through a camera lens.</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+<!-- Special Item -->
+<div class="clothing-item relative">
+<img alt="Full Reality Glitch Outfit" class="w-full h-auto comic-border" loading="lazy" src="assets/img_500x600_d796e4b2.png"/>
+<div class="price-tag">$599</div>
+<div class="mt-4">
+<h3 class="text-2xl font-bold">The Full Reality Glitch</h3>
+<p class="text-gray-700">Complete outfit for those who exist between dimensions. Includes all pieces designed to create maximum reality distortion.</p>
+</div>
+</div>
+<!-- Testimonial -->
+<div class="comic-panel bg-white">
+<h3 class="text-2xl font-bold mb-4">From Our Customers</h3>
+<div class="mb-6">
+<p class="text-lg italic">"I wore the Glitch Jacket to a party and three people swore they couldn't see me for several minutes. Success!"</p>
+<p class="text-right font-bold mt-2">- Alex T.</p>
+</div>
+<div class="mb-6">
+<p class="text-lg italic">"The Reception Hat picked up a radio station that hasn't broadcast since 1976. Now I can't take it off."</p>
+<p class="text-right font-bold mt-2">- Jamie K.</p>
+</div>
+<div>
+<p class="text-lg italic">"Wearing the full outfit caused me to temporarily disappear from all my friends' memories. Five stars!"</p>
+<p class="text-right font-bold mt-2">- Morgan P.</p>
+</div>
+</div>
+</div>
+<div class="text-center">
+<p class="text-xl mb-6">All items are handmade and may cause temporal anomalies. Ghee's Threads is not responsible for any reality glitches, memory lapses, or interdimensional travel that may occur while wearing these items.</p>
+<button class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-8 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-xl" id="threads-order">
+                    Order Custom Piece
+                </button>
+</div>
+</div>
+</div>
+<!-- Strawberry Paradox Modal -->
+<div class="strawberry-paradox-container" id="strawberry-paradox-modal">
+<div class="strawberry-paradox-content">
+<span class="strawberry-paradox-close">×</span>
+<h2 class="text-4xl font-bold text-center mb-8 comic-text">The Strawberry Paradox</h2>
+<p class="text-xl text-center mb-10">An interactive installation exploring the relationship between fruit and existential dread.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
+<div>
+<img alt="Strawberry Paradox Installation" class="w-full h-auto comic-border mb-6" loading="lazy" src="assets/img_500x400_a27bf494.png"/>
+<p class="text-lg">The Strawberry Paradox was first exhibited at the Auckland Art Gallery in 2022, where visitors reported feelings of "delicious unease" and "sweet existential crisis."</p>
+</div>
+<div class="comic-panel">
+<h3 class="text-2xl font-bold mb-4">Artist's Statement</h3>
+<p class="text-lg mb-4">The strawberry represents the perfect paradox: sweet yet tart, fragile yet resilient, ephemeral yet eternal in its cyclical return.</p>
+<p class="text-lg mb-4">When we bite into a strawberry, we're consuming something that exists in a liminal space between pleasure and decay. The seeds on its exterior are actually its ovaries - we're eating reproductive organs displayed on the outside.</p>
+<p class="text-lg">This installation asks: If something so familiar can be so strange upon reflection, what other everyday experiences might reveal the uncanny nature of existence?</p>
+</div>
+</div>
+<h3 class="text-3xl font-bold text-center mb-6">Interactive Experience</h3>
+<p class="text-xl text-center mb-8">Click on the strawberries below to reveal existential thoughts. How many can you find?</p>
+<div class="strawberry-container" id="strawberry-interactive">
+<!-- Strawberries will be dynamically added here -->
+</div>
+<div class="mt-10 p-6 comic-panel" id="thought-display">
+<p class="text-xl text-center italic">Click on strawberries to reveal thoughts...</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+<div class="comic-panel">
+<h4 class="text-xl font-bold mb-3">Materials</h4>
+<ul class="list-disc pl-5 text-lg">
+<li>Real strawberries (replaced daily)</li>
+<li>Projected video</li>
+<li>Motion sensors</li>
+<li>Audio recordings</li>
+<li>Scent diffusers</li>
+</ul>
+</div>
+<div class="comic-panel">
+<h4 class="text-xl font-bold mb-3">Dimensions</h4>
+<p class="text-lg">Variable, typically 6m x 8m room</p>
+<p class="text-lg mt-2">The installation adapts to the space it inhabits, much like existential dread adapts to one's life circumstances.</p>
+</div>
+<div class="comic-panel">
+<h4 class="text-xl font-bold mb-3">Duration</h4>
+<p class="text-lg">15-20 minutes per visitor</p>
+<p class="text-lg mt-2">Though some report that time seems to dilate within the installation space.</p>
+</div>
+</div>
+<div class="mt-12 text-center">
+<p class="text-xl mb-6">The Strawberry Paradox is available for exhibition. Contact me for details on bringing this experience to your gallery or event.</p>
+<a class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-xl strawberry-paradox-close" href="#contact">
+                    Inquire About Exhibition
+                </a>
+</div>
+</div>
+</div>
+<!-- Quantum Locations Modal -->
+<div class="quantum-locations-container" id="quantum-locations-modal">
+<div class="quantum-locations-content">
+<span class="quantum-locations-close">×</span>
+<h2 class="text-4xl font-bold text-center mb-8 comic-text">Quantum Locations</h2>
+<p class="text-xl text-center mb-10">A photo series documenting places that seem to shift and change between visits.</p>
+<div class="comic-panel mb-12">
+<h3 class="text-2xl font-bold mb-4">Project Statement</h3>
+<p class="text-lg mb-4">Inspired by my experience with the vanishing RadioShack, I began documenting locations around Auckland and beyond that seem to exist in a state of quantum uncertainty.</p>
+<p class="text-lg mb-4">Each pair of photographs shows the same location visited twice, usually days or weeks apart. No digital manipulation was used - these are the actual changes I encountered.</p>
+<p class="text-lg">The project raises questions about the stability of reality, the reliability of memory, and the possibility that certain places exist in multiple states simultaneously, only resolving into one configuration when observed.</p>
+</div>
+<!-- Location Pair 1 -->
+<div class="location-pair">
+<div class="location-image comic-border">
+<img alt="Electronics Shop - First Visit" loading="lazy" src="assets/img_500x400_f3681306.png"/>
+<div class="image-overlay">
+<div class="overlay-text">
+<h4 class="text-xl font-bold">First Visit: May 12, 2022</h4>
+<p>Electronics shop with distinctive red awning</p>
+</div>
+</div>
+</div>
+<div class="location-image comic-border">
+<img alt="Cafe - Second Visit" loading="lazy" src="assets/img_500x400_57156e71.png"/>
+<div class="image-overlay">
+<div class="overlay-text">
+<h4 class="text-xl font-bold">Second Visit: May 14, 2022</h4>
+<p>Cafe that appears to have been there for years</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Location Pair 2 -->
+<div class="location-pair">
+<div class="location-image comic-border">
+<img alt="Park with Statue - First Visit" loading="lazy" src="assets/img_500x400_5637eaa5.png"/>
+<div class="image-overlay">
+<div class="overlay-text">
+<h4 class="text-xl font-bold">First Visit: June 3, 2022</h4>
+<p>Park with distinctive modernist statue</p>
+</div>
+</div>
+</div>
+<div class="location-image comic-border">
+<img alt="Park without Statue - Second Visit" loading="lazy" src="assets/img_500x400_6154c248.png"/>
+<div class="image-overlay">
+<div class="overlay-text">
+<h4 class="text-xl font-bold">Second Visit: June 10, 2022</h4>
+<p>Same park, no statue, different tree arrangement</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Location Pair 3 -->
+<div class="location-pair">
+<div class="location-image comic-border">
+<img alt="Street Corner - First Visit" loading="lazy" src="assets/img_500x400_e9a040fa.png"/>
+<div class="image-overlay">
+<div class="overlay-text">
+<h4 class="text-xl font-bold">First Visit: July 22, 2022</h4>
+<p>Street corner with distinctive Art Deco building</p>
+</div>
+</div>
+</div>
+<div class="location-image comic-border">
+<img alt="Street Corner - Second Visit" loading="lazy" src="assets/img_500x400_9569baea.png"/>
+<div class="image-overlay">
+<div class="overlay-text">
+<h4 class="text-xl font-bold">Second Visit: July 29, 2022</h4>
+<p>Same corner, now with modern glass building that locals claim has been there for decades</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Location Pair 4 -->
+<div class="location-pair">
+<div class="location-image comic-border">
+<img alt="Beach - First Visit" loading="lazy" src="assets/img_500x400_ade3d016.png"/>
+<div class="image-overlay">
+<div class="overlay-text">
+<h4 class="text-xl font-bold">First Visit: August 15, 2022</h4>
+<p>Beach with unusual rock formation</p>
+</div>
+</div>
+</div>
+<div class="location-image comic-border">
+<img alt="Beach - Second Visit" loading="lazy" src="assets/img_500x400_2fd37a7a.png"/>
+<div class="image-overlay">
+<div class="overlay-text">
+<h4 class="text-xl font-bold">Second Visit: August 18, 2022</h4>
+<p>Same beach, completely different shoreline, no rock formation</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12 text-center">
+<p class="text-xl mb-6">This ongoing project continues to document the fluid nature of reality in Auckland and beyond. Have you experienced a quantum location? I'd love to hear about it.</p>
+<a class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-xl quantum-locations-close" href="#contact">
+                    Share Your Experience
+                </a>
+</div>
+</div>
+</div>
+<!-- Scripts -->
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuToggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+            
+            // Back to top button
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Contact form handling
+            const contactForm = document.getElementById('contact-form');
+            const formStatus = document.getElementById('form-status');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form data
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        subject: document.getElementById('subject').value,
+                        message: document.getElementById('message').value,
+                        timestamp: new Date().toISOString()
+                    };
+                    
+                    // Save form data and send email
+                    try {
+                        window.save_data_to_csv('contact_submissions.csv', [formData]);
+                        
+                        // Send email notification
+                        const emailData = {
+                            to: "frasay@gmail.com",
+                            subject: `New Contact Form: ${formData.subject}`,
+                            body: `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\nMessage: ${formData.message}\nTimestamp: ${formData.timestamp}`
+                        };
+                        
+                        window.send_email(emailData);
+                        
+                        // Show success message
+                        formStatus.innerHTML = '<p class="text-green-600 font-bold">Message sent successfully! Ghee will get back to you soon.</p>';
+                        formStatus.classList.remove('hidden');
+                        
+                        // Reset form
+                        contactForm.reset();
+                        
+                        // Hide message after 5 seconds
+                        setTimeout(() => {
+                            formStatus.classList.add('hidden');
+                        }, 5000);
+                    } catch (error) {
+                        // Show error message
+                        formStatus.innerHTML = '<p class="text-red-600 font-bold">Something went wrong. Please try again later.</p>';
+                        formStatus.classList.remove('hidden');
+                    }
+                });
+            }
+            
+            // Newsletter form handling
+            const newsletterForm = document.getElementById('newsletter-form');
+            const newsletterStatus = document.getElementById('newsletter-status');
+            
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get email
+                    const email = newsletterForm.querySelector('input[type="email"]').value;
+                    
+                    // Save newsletter subscription
+                    try {
+                        window.save_data_to_csv('newsletter_subscriptions.csv', [{
+                            email: email,
+                            timestamp: new Date().toISOString()
+                        }]);
+                        
+                        // Show success message
+                        newsletterStatus.innerHTML = '<p class="text-green-600 font-bold">Subscribed successfully! Welcome to the Strawberry Fields.</p>';
+                        newsletterStatus.classList.remove('hidden');
+                        
+                        // Reset form
+                        newsletterForm.reset();
+                        
+                        // Hide message after 5 seconds
+                        setTimeout(() => {
+                            newsletterStatus.classList.add('hidden');
+                        }, 5000);
+                    } catch (error) {
+                        // Show error message
+                        newsletterStatus.innerHTML = '<p class="text-red-600 font-bold">Something went wrong. Please try again later.</p>';
+                        newsletterStatus.classList.remove('hidden');
+                    }
+                });
+            }
+            
+            // GSAP Animations
+            gsap.from(".speech-bubble", {
+                y: -50,
+                opacity: 0,
+                duration: 1,
+                ease: "bounce.out"
+            });
+            
+            // Image loading animation
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                if (!img.complete) {
+                    img.style.opacity = '0';
+                    img.addEventListener('load', function() {
+                        gsap.to(img, {
+                            opacity: 1,
+                            duration: 0.5
+                        });
+                    });
+                }
+            });
+            
+            // Remove loading overlay
+            const loadingOverlay = document.getElementById('loading');
+            setTimeout(() => {
+                gsap.to(loadingOverlay, {
+                    opacity: 0,
+                    duration: 0.5,
+                    onComplete: () => {
+                        loadingOverlay.style.display = 'none';
+                    }
+                });
+            }, 1000);
+            
+            // RadioShack Simulator Functionality
+            const radioshackModal = document.getElementById('radioshack-modal');
+            const radioshackLink = document.getElementById('radioshack-link');
+            const footerRadioshack = document.getElementById('footer-radioshack');
+            const radioshackClose = document.querySelector('.radioshack-close');
+            
+            // Open RadioShack Simulator
+            function openRadioshackSimulator() {
+                radioshackModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                
+                // Reset to first stage
+                document.querySelectorAll('#radioshack-stage > div').forEach(div => {
+                    div.classList.add('hidden');
+                });
+                document.getElementById('stage-1').classList.remove('hidden');
+                
+                // Log interaction
+                try {
+                    window.save_data_to_csv('radioshack_interactions.csv', [{
+                        action: 'opened_simulator',
+                        timestamp: new Date().toISOString()
+                    }]);
+                } catch (error) {
+                    console.error('Failed to log interaction:', error);
+                }
+            }
+            
+            // Close RadioShack Simulator
+            function closeRadioshackSimulator() {
+                radioshackModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Add event listeners for RadioShack Simulator
+            radioshackLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                openRadioshackSimulator();
+            });
+            
+            footerRadioshack.addEventListener('click', function(e) {
+                e.preventDefault();
+                openRadioshackSimulator();
+            });
+            
+            radioshackClose.addEventListener('click', closeRadioshackSimulator);
+            
+            // RadioShack Simulator Navigation
+            document.getElementById('enter-store').addEventListener('click', function() {
+                document.getElementById('stage-1').classList.add('hidden');
+                document.getElementById('stage-2').classList.remove('hidden');
+                
+                // Add glitch effect randomly
+                setTimeout(() => {
+                    const img = document.querySelector('#stage-2 img');
+                    img.classList.add('glitch-effect');
+                    setTimeout(() => {
+                        img.classList.remove('glitch-effect');
+                    }, 200);
+                }, 2000);
+            });
+            
+            document.getElementById('look-around').addEventListener('click', function() {
+                document.getElementById('stage-2').classList.add('hidden');
+                document.getElementById('stage-3a').classList.remove('hidden');
+            });
+            
+            document.getElementById('talk-clerk').addEventListener('click', function() {
+                document.getElementById('stage-2').classList.add('hidden');
+                document.getElementById('stage-3b').classList.remove('hidden');
+            });
+            
+            document.getElementById('continue-looking').addEventListener('click', function() {
+                document.getElementById('stage-3a').classList.add('hidden');
+                document.getElementById('stage-4').classList.remove('hidden');
+            });
+            
+            document.getElementById('ask-about-store').addEventListener('click', function() {
+                document.getElementById('stage-3b').classList.add('hidden');
+                document.getElementById('stage-4').classList.remove('hidden');
+            });
+            
+            document.getElementById('leave-store').addEventListener('click', function() {
+                document.getElementById('stage-4').classList.add('hidden');
+                document.getElementById('stage-5').classList.remove('hidden');
+                
+                // Create disorienting effect
+                gsap.to('.radioshack-content', {
+                    rotation: 2,
+                    duration: 1,
+                    ease: "power1.inOut"
+                });
+            });
+            
+            document.getElementById('question-reality').addEventListener('click', function() {
+                document.getElementById('stage-5').classList.add('hidden');
+                document.getElementById('stage-final').classList.remove('hidden');
+                
+                // Create more disorienting effects
+                gsap.to('.radioshack-content', {
+                    rotation: -2,
+                    duration: 1,
+                    ease: "power1.inOut"
+                });
+                
+                // Log completion
+                try {
+                    window.save_data_to_csv('radioshack_interactions.csv', [{
+                        action: 'completed_simulator',
+                        timestamp: new Date().toISOString()
+                    }]);
+                } catch (error) {
+                    console.error('Failed to log interaction:', error);
+                }
+            });
+            
+            document.getElementById('restart-experience').addEventListener('click', function() {
+                document.querySelectorAll('#radioshack-stage > div').forEach(div => {
+                    div.classList.add('hidden');
+                });
+                document.getElementById('stage-1').classList.remove('hidden');
+                
+                // Reset rotation
+                gsap.to('.radioshack-content', {
+                    rotation: 0,
+                    duration: 1,
+                    ease: "power1.inOut"
+                });
+            });
+            
+            document.getElementById('close-simulator').addEventListener('click', closeRadioshackSimulator);
+            
+
+            // Ghee's Threads Collection Functionality
+            const threadsLink = document.getElementById('threads-link');
+            const footerThreads = document.getElementById('footer-threads');
+            
+            // Update links to point to the standalone page
+            function handleThreadsLink(e) {
+                e.preventDefault();
+                
+                // Log interaction
+                try {
+                    window.save_data_to_csv('threads_interactions.csv', [{
+                        action: 'clicked_threads_link',
+                        timestamp: new Date().toISOString()
+                    }]);
+                } catch (error) {
+                    console.error('Failed to log interaction:', error);
+                }
+                
+                // Redirect to the Ghee's Threads page
+                window.location.href = 'gheesthreads.html';
+            }
+            
+            // Add event listeners for Threads Collection links
+            threadsLink.addEventListener('click', handleThreadsLink);
+            footerThreads.addEventListener('click', handleThreadsLink);
+        
+            
+            // Strawberry Paradox Functionality
+            const strawberryParadoxModal = document.getElementById('strawberry-paradox-modal');
+            const strawberryParadoxLink = document.getElementById('strawberry-paradox-link');
+            const footerStrawberry = document.getElementById('footer-strawberry');
+            const strawberryParadoxClose = document.querySelector('.strawberry-paradox-close');
+            
+            // Open Strawberry Paradox
+            function openStrawberryParadox() {
+                strawberryParadoxModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                
+                // Initialize interactive strawberries
+                initializeStrawberries();
+                
+                // Log interaction
+                try {
+                    window.save_data_to_csv('strawberry_interactions.csv', [{
+                        action: 'viewed_installation',
+                        timestamp: new Date().toISOString()
+                    }]);
+                } catch (error) {
+                    console.error('Failed to log interaction:', error);
+                }
+            }
+            
+            // Close Strawberry Paradox
+            function closeStrawberryParadox() {
+                strawberryParadoxModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Add event listeners for Strawberry Paradox
+            strawberryParadoxLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                openStrawberryParadox();
+            });
+            
+            footerStrawberry.addEventListener('click', function(e) {
+                e.preventDefault();
+                openStrawberryParadox();
+            });
+            
+            strawberryParadoxClose.addEventListener('click', closeStrawberryParadox);
+            
+            // All close buttons with the class should close the modal
+            document.querySelectorAll('.strawberry-paradox-close').forEach(button => {
+                button.addEventListener('click', closeStrawberryParadox);
+            });
+            
+            // Initialize interactive strawberries
+            function initializeStrawberries() {
+                const container = document.getElementById('strawberry-interactive');
+                const thoughtDisplay = document.getElementById('thought-display');
+                
+                // Clear previous strawberries
+                container.innerHTML = '';
+                
+                // Existential thoughts
+                const thoughts = [
+                    "If a strawberry falls in a forest and no one is around to taste it, is it still sweet?",
+                    "We are all just strawberries waiting to be consumed by time.",
+                    "The seeds on the outside, the sweetness within. We hide our vulnerabilities and expose our strengths.",
+                    "A strawberry's existence is brief but intense. Much like our own.",
+                    "The strawberry doesn't question its purpose. Should we?",
+                    "Red like passion, shaped like a heart, yet we reduce it to a mere snack.",
+                    "The strawberry offers itself completely, holding nothing back. Can we say the same?",
+                    "In the garden of existence, are we the strawberry or the one who picks it?",
+                    "The strawberry knows it will die, yet it becomes as sweet as possible before the end.",
+                    "We are all decomposing at different rates. The strawberry just does it more honestly.",
+                    "The strawberry doesn't try to be a banana. Why do we try to be someone else?",
+                    "The most perfect strawberry still has seeds that get stuck in your teeth. Perfection is an illusion."
+                ];
+                
+                // Create 12 strawberries
+                for (let i = 0; i < 12; i++) {
+                    const strawberry = document.createElement('img');
+                    strawberry.src = `https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of single strawberry&w=50&h=50&transparent=true&style=artistic&seed=${i}`;
+                    strawberry.alt = 'Interactive Strawberry';
+                    strawberry.className = 'strawberry';
+                    strawberry.style.left = `${Math.random() * 90}%`;
+                    strawberry.style.top = `${Math.random() * 80}%`;
+                    
+                    // Add click event
+                    strawberry.addEventListener('click', function() {
+                        // Display thought
+                        thoughtDisplay.innerHTML = `<p class="text-xl text-center italic">"${thoughts[i]}"</p>`;
+                        
+                        // Animate strawberry
+                        gsap.to(this, {
+                            scale: 1.5,
+                            rotation: 360,
+                            duration: 0.5,
+                            onComplete: () => {
+                                gsap.to(this, {
+                                    scale: 1,
+                                    duration: 0.3
+                                });
+                            }
+                        });
+                        
+                        // Log interaction
+                        try {
+                            window.save_data_to_csv('strawberry_interactions.csv', [{
+                                action: 'clicked_strawberry',
+                                thought_index: i,
+                                timestamp: new Date().toISOString()
+                            }]);
+                        } catch (error) {
+                            console.error('Failed to log interaction:', error);
+                        }
+                    });
+                    
+                    container.appendChild(strawberry);
+                }
+            }
+            
+            // Quantum Locations Functionality
+            const quantumLocationsModal = document.getElementById('quantum-locations-modal');
+            const quantumLocationsLink = document.getElementById('quantum-locations-link');
+            const footerQuantum = document.getElementById('footer-quantum');
+            const quantumLocationsClose = document.querySelector('.quantum-locations-close');
+            
+            // Open Quantum Locations
+            function openQuantumLocations() {
+                quantumLocationsModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                
+                // Log interaction
+                try {
+                    window.save_data_to_csv('quantum_interactions.csv', [{
+                        action: 'viewed_photos',
+                        timestamp: new Date().toISOString()
+                    }]);
+                } catch (error) {
+                    console.error('Failed to log interaction:', error);
+                }
+            }
+            
+            // Close Quantum Locations
+            function closeQuantumLocations() {
+                quantumLocationsModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Add event listeners for Quantum Locations
+            quantumLocationsLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                openQuantumLocations();
+            });
+            
+            footerQuantum.addEventListener('click', function(e) {
+                e.preventDefault();
+                openQuantumLocations();
+            });
+            
+            quantumLocationsClose.addEventListener('click', closeQuantumLocations);
+            
+            // All close buttons with the class should close the modal
+            document.querySelectorAll('.quantum-locations-close').forEach(button => {
+                button.addEventListener('click', closeQuantumLocations);
+            });
+            
+            // Add random glitch effects to RadioShack images
+            setInterval(() => {
+                const radioshackImages = document.querySelectorAll('.radioshack-image');
+                if (radioshackImages.length > 0 && Math.random() > 0.7) {
+                    const randomImage = radioshackImages[Math.floor(Math.random() * radioshackImages.length)];
+                    randomImage.classList.add('glitch-effect');
+                    setTimeout(() => {
+                        randomImage.classList.remove('glitch-effect');
+                    }, 200);
+                }
+            }, 3000);
+            
+            // Occasionally change the static overlay opacity for RadioShack simulator
+            setInterval(() => {
+                const staticOverlay = document.querySelector('.static-overlay');
+                if (staticOverlay && radioshackModal.style.display === 'flex') {
+                    const newOpacity = Math.random() * 0.2;
+                    staticOverlay.style.opacity = newOpacity;
+                }
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
