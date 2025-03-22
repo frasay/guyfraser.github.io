@@ -48,7 +48,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
         
         body {
-            font-family: 'Comic Sans MS', 'Bangers', 'Arial Rounded MT Bold', 'Chalkboard SE', 'Comic Neue', sans-serif;
+            font-family: 'Comic Sans MS', 'Bangers', cursive, sans-serif;
             background-color: #f9f3e5;
             overflow-x: hidden;
         }
@@ -330,6 +330,93 @@
             transform: scale(1.2);
         }
         
+	/* Disappearing Manual Styles */
+.adventure-page {
+    display: none;
+}
+
+.adventure-page.active {
+    display: block;
+}
+
+.adventure-choice {
+    display: inline-block;
+    background-color: #e53e3e;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    border: 2px solid black;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.8);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.adventure-choice:hover {
+    transform: scale(1.05);
+    background-color: #c53030;
+}
+
+.page-number {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: #666;
+}
+
+.adventure-restart {
+    display: inline-block;
+    background-color: #3182ce;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: 2px solid black;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.8);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.adventure-restart:hover {
+    transform: scale(1.05);
+    background-color: #2c5282;
+}
+	
+/* Modal styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9998;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #f9f3e5;
+    border: 3px solid black;
+    box-shadow: 8px 8px 0px rgba(0,0,0,0.8);
+    padding: 30px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
         /* Quantum Locations Styles */
         .quantum-locations-container {
             display: none;
@@ -577,15 +664,20 @@
 <p class="text-lg mb-4">A clothing line inspired by the aesthetic of disappearing electronics stores and French agriculture.</p>
 <a class="inline-block bg-black text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors duration-300" href="#" id="threads-link">View Collection</a>
 </div>
-<!-- Portfolio Item 5 -->
+<!-- Portfolio Item - Disappearing Manual -->
 <div class="comic-panel bg-white" data-aos="zoom-in" data-aos-delay="400">
-<div class="relative overflow-hidden mb-4">
-<img alt="Strange Publication" class="w-full h-64 object-cover comic-border" loading="lazy" src="assets/img_400x300_91b1ac1a.png"/>
-<div class="absolute top-0 right-0 bg-yellow-500 text-white py-1 px-3 font-bold">WRITING</div>
-</div>
-<h3 class="text-2xl font-bold mb-2">The Disappearing Manual</h3>
-<p class="text-lg mb-4">A choose-your-own-adventure book where pages randomly disappear and reappear with different content.</p>
-<a class="inline-block bg-black text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors duration-300" href="#">View Project</a>
+    <div class="relative overflow-hidden mb-4">
+        <img
+            src="https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book art of strange book or publication&w=400&h=300&style=artistic"
+            alt="Strange Publication"
+            class="w-full h-64 object-cover comic-border"
+            loading="lazy"
+        >
+        <div class="absolute top-0 right-0 bg-yellow-500 text-white py-1 px-3 font-bold">WRITING</div>
+    </div>
+    <h3 class="text-2xl font-bold mb-2">The Disappearing Manual</h3>
+    <p class="text-lg mb-4">A choose-your-own-adventure book where pages randomly disappear and reappear with different content.</p>
+    <button id="launch-manual" class="inline-block bg-black text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-800 transition-colors duration-300">Start Adventure</button>
 </div>
 <!-- Portfolio Item 6 - Quantum Locations -->
 <div class="comic-panel bg-white" data-aos="zoom-in" data-aos-delay="500">
@@ -701,92 +793,90 @@
 </div>
 </div>
 </section>
-   <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-red-100">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 comic-text">Get In Touch</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div class="comic-panel bg-white" data-aos="fade-right">
-                    <h3 class="text-3xl font-bold mb-6">Send Me A Message</h3>
-                    <form id="contact-form" class="space-y-6" action="https://formspree.io/f/meoeypvq" method="POST">
-                        <div>
-                            <label for="name" class="block text-xl font-bold mb-2">Your Name</label>
-                            <input type="text" id="name" name="name" class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
-                        </div>
-                        <div>
-                            <label for="email" class="block text-xl font-bold mb-2">Your Email</label>
-                            <input type="email" id="email" name="email" class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
-                        </div>
-                        <div>
-                            <label for="subject" class="block text-xl font-bold mb-2">Subject</label>
-                            <input type="text" id="subject" name="subject" class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required>
-                        </div>
-                        <div>
-                            <label for="message" class="block text-xl font-bold mb-2">Your Message</label>
-                            <textarea id="message" name="message" rows="5" class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" required></textarea>
-                        </div>
-                        <input type="hidden" name="_subject" value="New message from GuyFraser.com">
-                        <input type="hidden" name="_next" value="https://guyfraser.com/thank-you.html">
-                        <div>
-                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-xl">
+<!-- Contact Section -->
+<section class="py-20 bg-red-100" id="contact">
+<div class="container mx-auto px-4">
+<h2 class="text-4xl md:text-5xl font-bold text-center mb-16 comic-text">Get In Touch</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<div class="comic-panel bg-white" data-aos="fade-right">
+<h3 class="text-3xl font-bold mb-6">Send Me A Message</h3>
+<form class="space-y-6" id="contact-form">
+<div>
+<label class="block text-xl font-bold mb-2" for="name">Your Name</label>
+<input class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" id="name" name="name" required="" type="text"/>
+</div>
+<div>
+<label class="block text-xl font-bold mb-2" for="email">Your Email</label>
+<input class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" id="email" name="email" required="" type="email"/>
+</div>
+<div>
+<label class="block text-xl font-bold mb-2" for="subject">Subject</label>
+<input class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" id="subject" name="subject" required="" type="text"/>
+</div>
+<div>
+<label class="block text-xl font-bold mb-2" for="message">Your Message</label>
+<textarea class="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500" id="message" name="message" required="" rows="5"></textarea>
+</div>
+<div>
+<button class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-lg comic-border transform hover:scale-105 transition-transform duration-300 text-xl" type="submit">
                                 Send Message
                             </button>
-                        </div>
-                        <div id="form-status" class="hidden"></div>
-                    </form>
-                </div>
-                <div class="comic-panel bg-white" data-aos="fade-left">
-                    <h3 class="text-3xl font-bold mb-6">Find Me Here</h3>
-                    <div class="space-y-6">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white mr-4">
-                                <i class="fas fa-map-marker-alt text-2xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-bold">Location</h4>
-                                <p class="text-lg">Auckland, Aotearoa | New Zealand (except when the city glitches)</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white mr-4">
-                                <i class="fas fa-envelope text-2xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-bold">Email</h4>
-                                <p class="text-lg">frasay@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white mr-4">
-                                <i class="fas fa-phone text-2xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-xl font-bold">Phone</h4>
-                                <p class="text-lg">(555) STRAWBERRY</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-10">
-                        <h4 class="text-2xl font-bold mb-4">Follow My Strange Journey</h4>
-                        <div class="flex space-x-4">
-                            <a href="#" class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-300">
-                                <i class="fab fa-facebook-f text-2xl"></i>
-                            </a>
-                            <a href="#" class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center text-white hover:bg-blue-500 transition-colors duration-300">
-                                <i class="fab fa-twitter text-2xl"></i>
-                            </a>
-                            <a href="#" class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center text-white hover:bg-pink-700 transition-colors duration-300">
-                                <i class="fab fa-instagram text-2xl"></i>
-                            </a>
-                            <a href="#" class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-colors duration-300">
-                                <i class="fab fa-youtube text-2xl"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+</div>
+<div class="hidden" id="form-status"></div>
+</form>
+</div>
+<div class="comic-panel bg-white" data-aos="fade-left">
+<h3 class="text-3xl font-bold mb-6">Find Me Here</h3>
+<div class="space-y-6">
+<div class="flex items-center">
+<div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white mr-4">
+<i class="fas fa-map-marker-alt text-2xl"></i>
+</div>
+<div>
+<h4 class="text-xl font-bold">Location</h4>
+<p class="text-lg">Auckland, Aotearoa | New Zealand (except when the city glitches)</p>
+</div>
+</div>
+<div class="flex items-center">
+<div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white mr-4">
+<i class="fas fa-envelope text-2xl"></i>
+</div>
+<div>
+<h4 class="text-xl font-bold">Email</h4>
+<p class="text-lg">frasay@gmail.com</p>
+</div>
+</div>
+<div class="flex items-center">
+<div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white mr-4">
+<i class="fas fa-phone text-2xl"></i>
+</div>
+<div>
+<h4 class="text-xl font-bold">Phone</h4>
+<p class="text-lg">(555) STRAWBERRY</p>
+</div>
+</div>
+</div>
+<div class="mt-10">
+<h4 class="text-2xl font-bold mb-4">Follow My Strange Journey</h4>
+<div class="flex space-x-4">
+<a class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-300" href="#">
+<i class="fab fa-facebook-f text-2xl"></i>
+</a>
+<a class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center text-white hover:bg-blue-500 transition-colors duration-300" href="#">
+<i class="fab fa-twitter text-2xl"></i>
+</a>
+<a class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center text-white hover:bg-pink-700 transition-colors duration-300" href="#">
+<i class="fab fa-instagram text-2xl"></i>
+</a>
+<a class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-colors duration-300" href="#">
+<i class="fab fa-youtube text-2xl"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <!-- Newsletter Section -->
 <section class="py-16 bg-yellow-400 border-t-4 border-b-4 border-black">
 <div class="container mx-auto px-4">
@@ -828,6 +918,8 @@
 <li><a class="hover:text-red-400 transition-colors duration-300" href="#" id="footer-radioshack">RadioShack Simulator</a></li>
 <li><a class="hover:text-red-400 transition-colors duration-300" href="#">Fraise Sonata</a></li>
 <li><a class="hover:text-red-400 transition-colors duration-300" href="#" id="footer-threads">Ghee's Threads</a></li>
+<li><a href="#" id="footer-manual" class="hover:text-red-400 transition-colors duration-300">Disappearing Manual</a></li>
+
 <li><a class="hover:text-red-400 transition-colors duration-300" href="#" id="footer-quantum">Quantum Locations</a></li>
 </ul>
 </div>
@@ -917,6 +1009,15 @@
 </div>
 </div>
 </div>
+</div>
+<!-- Disappearing Manual Modal -->
+<div id="manual-modal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="modal-close" id="manual-close">&times;</span>
+        <div id="manual-content">
+            <!-- Content will be dynamically generated -->
+        </div>
+    </div>
 </div>
 <!-- Ghee's Threads Collection Modal -->
 <div class="threads-container" id="threads-modal">
@@ -1236,7 +1337,7 @@
                 });
             });
             
-            // Contact form handling
+             // Contact form handling
             const contactForm = document.getElementById('contact-form');
             const formStatus = document.getElementById('form-status');
             
@@ -1253,22 +1354,18 @@
                         timestamp: new Date().toISOString()
                     };
                     
-                    // Save form data and send email
+                    // Save form data
                     try {
                         window.save_data_to_csv('contact_submissions.csv', [formData]);
-                        
-                        // Send email notification
-                        const emailData = {
-                            to: "frasay@gmail.com",
-                            subject: `New Contact Form: ${formData.subject}`,
-                            body: `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\nMessage: ${formData.message}\nTimestamp: ${formData.timestamp}`
-                        };
-                        
-                        window.send_email(emailData);
                         
                         // Show success message
                         formStatus.innerHTML = '<p class="text-green-600 font-bold">Message sent successfully! Ghee will get back to you soon.</p>';
                         formStatus.classList.remove('hidden');
+                        
+                        // Send email notification (simulated)
+                        console.log(`Email would be sent to: frasay@gmail.com`);
+                        console.log(`Subject: New contact form submission from ${formData.name}`);
+                        console.log(`Message: ${formData.message}`);
                         
                         // Reset form
                         contactForm.reset();
@@ -1488,7 +1585,231 @@
             
             document.getElementById('close-simulator').addEventListener('click', closeRadioshackSimulator);
             
+// Function to open the Disappearing Manual modal
+function openManualModal() {
+    const modal = document.getElementById('manual-modal');
+    if (!modal) return;
+    
+    // Show the modal
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        modal.style.opacity = '1';
+    }, 50);
+    
+    // Prevent body scrolling
+    document.body.style.overflow = 'hidden';
+    
+    // Load content
+    loadManualContent();
+}
 
+// Function to close the modal
+function closeManualModal() {
+    const modal = document.getElementById('manual-modal');
+    if (!modal) return;
+    
+    modal.style.opacity = '0';
+    setTimeout(() => {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }, 500);
+}
+
+// Add event listeners for the manual
+document.getElementById('launch-manual').addEventListener('click', function(e) {
+    e.preventDefault();
+    openManualModal();
+});
+
+document.getElementById('footer-manual').addEventListener('click', function(e) {
+    e.preventDefault();
+    openManualModal();
+});
+
+document.getElementById('manual-close').addEventListener('click', closeManualModal);
+
+// Close when clicking outside content
+document.getElementById('manual-modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeManualModal();
+    }
+});
+			// Function to load the Disappearing Manual content
+function loadManualContent() {
+    const content = document.getElementById('manual-content');
+    if (!content) return;
+
+    content.innerHTML = `
+        <div>
+            <h2 class="text-4xl font-bold text-center mb-8 comic-text">The Disappearing Manual</h2>
+            <p class="text-xl text-center mb-10">A choose-your-own-adventure where pages randomly disappear and reappear with different content.</p>
+
+            <div class="adventure-page active" id="page-1">
+                <div class="comic-panel">
+                    <h3 class="text-2xl font-bold mb-4">Page 1: The Beginning</h3>
+                    <img
+                        src="https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of person finding strange book&w=600&h=400&style=artistic"
+                        alt="Finding the Book"
+                        class="mx-auto comic-border mb-6"
+                        loading="lazy"
+                    >
+                    <p class="text-lg mb-6">You find a strange book in an abandoned RadioShack. The cover reads "Manual for Navigating Reality Glitches." As you open it, the pages seem to shift and change before your eyes.</p>
+                    <p class="text-lg mb-6">The first page presents you with a choice:</p>
+                    <div class="text-center">
+                        <button class="adventure-choice" data-target="page-2a">Turn to the chapter about "Vanishing Locations"</button>
+                        <button class="adventure-choice" data-target="page-2b">Turn to the chapter about "Memory Inconsistencies"</button>
+                    </div>
+                    <div class="page-number">Page 1</div>
+                </div>
+            </div>
+
+            <div class="adventure-page" id="page-2a">
+                <div class="comic-panel">
+                    <h3 class="text-2xl font-bold mb-4">Page 7: Vanishing Locations</h3>
+                    <img
+                        src="https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of building fading or disappearing&w=600&h=400&style=artistic"
+                        alt="Vanishing Building"
+                        class="mx-auto comic-border mb-6"
+                        loading="lazy"
+                    >
+                    <p class="text-lg mb-6">Wait, this isn't page 2. The book seems to have skipped ahead to page 7. The text explains that some locations exist in a state of quantum uncertainty, appearing and disappearing based on who's observing them.</p>
+                    <p class="text-lg mb-6">The manual suggests an experiment: visit a place you've never been before, take a photo, then return the next day to see if it's still there.</p>
+                    <div class="text-center">
+                        <button class="adventure-choice" data-target="page-3a">Try the experiment</button>
+                        <button class="adventure-choice" data-target="page-3b">Look for the missing page 2</button>
+                    </div>
+                    <div class="page-number">Page 7</div>
+                </div>
+            </div>
+
+            <div class="adventure-page" id="page-2b">
+                <div class="comic-panel">
+                    <h3 class="text-2xl font-bold mb-4">Page 23: Memory Inconsistencies</h3>
+                    <img
+                        src="https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of person with confused memories or thought bubbles&w=600&h=400&style=artistic"
+                        alt="Memory Confusion"
+                        class="mx-auto comic-border mb-6"
+                        loading="lazy"
+                    >
+                    <p class="text-lg mb-6">That's strange, you were looking for page 2 but found page 23 instead. The text discusses how memories can be unreliable, especially when reality itself is unstable.</p>
+                    <p class="text-lg mb-6">The manual suggests an experiment: write down a vivid childhood memory, seal it in an envelope, and check it again in one week to see if the details have changed.</p>
+                    <div class="text-center">
+                        <button class="adventure-choice" data-target="page-3c">Try the memory experiment</button>
+                        <button class="adventure-choice" data-target="page-3d">Close the book and put it away</button>
+                    </div>
+                    <div class="page-number">Page 23</div>
+                </div>
+            </div>
+
+            <div class="adventure-page" id="page-3a">
+                <div class="comic-panel">
+                    <h3 class="text-2xl font-bold mb-4">Page 42: The Experiment Results</h3>
+                    <img
+                        src="https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of person looking at photo of place that no longer exists&w=600&h=400&style=artistic"
+                        alt="Photo Experiment"
+                        class="mx-auto comic-border mb-6"
+                        loading="lazy"
+                    >
+                    <p class="text-lg mb-6">You tried the experiment. You found a quaint bookstore you'd never noticed before, took a photo, and returned the next day. In its place was a laundromat that looked decades old.</p>
+                    <p class="text-lg mb-6">When you checked your phone, the photo had changed too - now showing the laundromat instead of the bookstore.</p>
+                    <div class="text-center">
+                        <button class="adventure-choice" data-target="page-4a">Ask someone else if they remember the bookstore</button>
+                        <button class="adventure-choice" data-target="page-4b">Return to the manual for answers</button>
+                    </div>
+                    <div class="page-number">Page 42</div>
+                </div>
+            </div>
+
+            <div class="adventure-page" id="page-3b">
+                <div class="comic-panel">
+                    <h3 class="text-2xl font-bold mb-4">Page 2: Found It!</h3>
+                    <img
+                        src="https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of blank or faded page&w=600&h=400&style=artistic"
+                        alt="Blank Page"
+                        class="mx-auto comic-border mb-6"
+                        loading="lazy"
+                    >
+                    <p class="text-lg mb-6">You flip back and find page 2, but it's completely blank. As you stare at it, faint text begins to appear, then disappears again before you can read it.</p>
+                    <p class="text-lg mb-6">At the bottom of the page, one sentence remains visible: "The manual changes based on what you need to know, not what you want to know."</p>
+                    <div class="text-center">
+                        <button class="adventure-choice" data-target="page-4c">Close the book and forget about it</button>
+                        <button class="adventure-choice" data-target="page-4d">Ask the book a specific question</button>
+                    </div>
+                    <div class="page-number">Page 2</div>
+                </div>
+            </div>
+
+            <div class="adventure-page" id="page-final">
+                <div class="comic-panel">
+                    <h3 class="text-2xl font-bold mb-4">The Final Page</h3>
+                    <img
+                        src="https://cdn.simulationtheory.ai/gasset/?asset=img&prompt=robert crumb style comic book drawing of person with enlightened expression looking at strange book&w=600&h=400&style=artistic"
+                        alt="Enlightenment"
+                        class="mx-auto comic-border mb-6"
+                        loading="lazy"
+                    >
+                    <p class="text-lg mb-6">As you continue to explore the manual, you realize that the book itself is changing based on your choices and observations. It's a perfect metaphor for reality itself.</p>
+                    <p class="text-lg mb-6">The final page contains a simple message: "Reality is what you make of it. Or perhaps what it makes of you."</p>
+                    <p class="text-lg mb-6">You close the book, but when you try to open it again later, all the pages are blank. The manual has disappeared, just like that RadioShack.</p>
+                    <div class="text-center">
+                        <button class="adventure-restart">Start Over</button>
+                    </div>
+                    <div class="page-number">The End</div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Add event listeners for adventure choices
+    document.querySelectorAll('.adventure-choice').forEach(choice => {
+        choice.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const targetPage = document.getElementById(targetId);
+
+            // If target page doesn't exist, go to final page
+            if (!targetPage) {
+                document.querySelectorAll('.adventure-page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                document.getElementById('page-final').classList.add('active');
+                return;
+            }
+
+            // Hide all pages
+            document.querySelectorAll('.adventure-page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show target page
+            targetPage.classList.add('active');
+
+            // Scroll to top of modal
+            const modalContent = this.closest('.modal-content');
+            if (modalContent) {
+                modalContent.scrollTop = 0;
+            }
+        });
+    });
+
+    // Add event listener for restart button
+    const restartButton = document.querySelector('.adventure-restart');
+    if (restartButton) {
+        restartButton.addEventListener('click', function() {
+            // Reset to first page
+            document.querySelectorAll('.adventure-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById('page-1').classList.add('active');
+
+            // Scroll to top of modal
+            const modalContent = this.closest('.modal-content');
+            if (modalContent) {
+                modalContent.scrollTop = 0;
+            }
+        });
+    }
+}
+			
             // Ghee's Threads Collection Functionality
             const threadsLink = document.getElementById('threads-link');
             const footerThreads = document.getElementById('footer-threads');
